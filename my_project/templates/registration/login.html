@@ -1,0 +1,23 @@
+{% extends 'my_apps/base.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="card card-container">
+            <form class="form-signin" method="post" action="{% url 'accounts:login' %}">
+                <span id="reauth-email" class="reauth-email"></span>
+               {{form.as_p}}
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" value="login">ログイン</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% csrf_token %}
+            </form><!-- /form -->
+            <a href="{% url 'accounts:change-password' %}" class="forgot-password">
+                パスワードを忘れましたか？
+            </a>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+
+{% if form.errors %}
+<p>ユーザー名とパスワードが一致しません。もう一度お試しください。</p>
+{% endif %}
+
+{% endblock %}

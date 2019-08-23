@@ -1,0 +1,67 @@
+{% extends "my_apps/base.html" %}
+{% load static %}
+{% block content %}
+
+{% if profile.image_cover.cover %}
+<div class="jumbotron user-detail-header main-bgcolor" style="background:url({{ profile.image_cover.cover.url }});">
+</div>
+{% else %}
+<div class="jumbotron user-detail-header main-bgcolor" style="background-image:url(https://www.transparenttextures.com/patterns/diagmonds-light.png);">
+</div>
+{% endif %}
+<div class="container mt-30 base-bg user-detail">
+
+    <div class="row">
+        <div class="col-sm-3 text-center">
+
+            {% for profile in profile_list %}
+                 <a href="{% url 'accounts:profile_detail' user.pk %}">
+         {% endfor %}
+                     <div class="user-profile">
+                          {% if profile.image_profile %}
+                      <img src="{{ profile.image_profile.medium.url }}">
+                    {% else %}
+                      <i class="material-icons" style="font-size:10rem;">account_circle</i>
+                    {% endif %}
+                      </div>
+                </a>
+
+        </div>
+        <div class="col-sm-9">
+            <h1>{{ profile.user_name }}</h1>
+
+            <form action="{% url 'accounts:follow' user.pk %}" method="get">
+                <button type="submit" name="button">お気に入り追加</button>
+                {% csrf_token %}
+            </form>
+
+             <ul class="base-ul">
+            <li>
+                投稿32件
+            </li>
+            <li>
+               フォロワー104人
+            </li>
+            <li>
+               18人をフォロー中
+            </li>
+
+        </ul>
+            <h2>松本 充</h2>
+            <p>ピストグループ代表取締役。愛媛県生まれの元自衛官。ウェブマーケとプログラミング(Python/PHP)。2015年150名規模の交流イベントを愛媛で開催。セールスアワード最優秀賞受賞。月50万PVの元メディア運営者。
+pistgroup.co.jp</p>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<div class="container mt-30 base-bg">
+
+
+</div>
+
+{% endblock %}

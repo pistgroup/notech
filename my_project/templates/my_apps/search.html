@@ -1,0 +1,28 @@
+{% extends "my_apps/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <table class="table">
+            {% for service in service_list %}
+    <tbody>
+
+        <tr>
+            <th><a class="top-bar__item top-bar__sign-in" href="{% url 'my_apps:service_detail' service.pk %}">サービス情報閲覧</a>
+              <a class="top-bar__item top-bar__sign-in" href="{% url 'my_apps:service_update' service.pk %}">サービス情報更新</a</th>
+            <td>{{ service.user }}</td>
+        </tr>
+        <tr>
+            <th>姓</th>
+            <td>{{ service.title }}</td>
+        </tr>
+        <tr>
+            <th>名</th>
+            <td>{{ service.text }}</td>
+        </tr>
+    </tbody>
+            {% endfor %}
+</table>
+    </div>
+</div>
+
+{% endblock %}

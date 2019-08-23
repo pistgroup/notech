@@ -1,0 +1,13 @@
+{% extends 'my_apps/base.html' %}
+
+
+{% block content %}
+<div class="container">
+
+        <h1>ログアウトしました</h1>
+        <p>ご利用いただきありがとうございました。</p>
+        <p><a class="btn" href="{% url 'accounts:login' %}">再ログインはこちら</a></p>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+ <!-- Pagination -->
+<div class="pagination clearfix mt-30 mb-15">
+  <nav class="pagination__nav right clearfix">
+  {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}" class="pagination__page"><i class="ui-arrow-left"></i></a>
+  {% endif %}
+      {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+    <span class="pagination__page pagination__page--current">{{ num }}</span>
+      {% else %}
+    <a href="?page={{ num }}" class="pagination__page">{{ num }}</a>
+      {% endif %}
+      {% endfor %}
+  {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="pagination__page"><i class="ui-arrow-right"></i></a>
+  {% endif %}
+  </nav>
+</div>

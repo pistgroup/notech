@@ -1,0 +1,104 @@
+
+a,
+.loader,
+.socials a:hover,
+.hero__link:hover,
+.feature__promo,
+.entry__title:hover a,
+.entry__meta a:hover,
+.entry__read-more-link:hover,
+.entry__tags a:hover,
+.comment-edit-link,
+.comment-reply:hover,
+.widget li a:hover,
+.widget_recent_entries li a:hover,
+.contact-info a:hover,
+.product__actions a:hover,
+.sign-in-popup__forgot-password:hover,
+.shop_table .product-name a:hover {
+	color: #bbbbbb;
+}
+
+.btn:hover,
+.btn-color,
+.btn-button:hover,
+.btn-button:focus,
+.ui-slider .ui-slider-range,
+.widget_tags a:hover,
+.pagination__page:not(span):hover,
+.remove:hover,
+#back-to-top:hover,
+.nav-cart__remove:hover {
+	background-color: #ec2424;
+}
+
+
+input:focus,
+textarea:focus,
+.hero__link:hover {
+	border-color: #ec2424;
+}
+main#main {
+    background: #f9f9f9;
+}
+
+.d1-color{
+color:rgba(0,0,0,0.87);
+}
+.d2-color{
+color:rgba(0,0,0,0.54);
+}
+.d3-color{
+color:rgba(0,0,0,0.26);
+}
+.d4-color{
+color:rgba(0,0,0,0.12);
+}
+.alt-color{
+color:rgba(0,0,0,0.10);
+}
+.w1-color{
+color: rgba(255,255,255,1.00);
+}
+.w2-color{
+color: rgba(255,255,255,0.70);
+}
+.w3-color{
+color: rgba(255,255,255,0.30);
+}
+.w4-color{
+color: rgba(255,255,255,0.12);
+}
+.d1-bgcolor{
+background-color:rgba(0,0,0,0.87);
+}
+.d2-bgcolor{
+background-color:rgba(0,0,0,0.54);
+}
+.d3-bgcolor{
+background-color:rgba(0,0,0,0.26);
+}
+.d4-bgcolor{
+background-color:rgba(0,0,0,0.12);
+}
+.alt-bgcolor{
+background-color:rgba(0,0,0,0.10);
+}
+.w1-bgcolor{
+background-color: rgba(255,255,255,1.00);
+}
+.w2-bgcolor{
+background-color: rgba(255,255,255,0.70);
+}
+.w3-bgcolor{
+background-color: rgba(255,255,255,0.30);
+}
+.w4-bgcolor{
+background-color: rgba(255,255,255,0.12);
+}
+.main-bgcolor{
+background:#30DAB8;
+}
+.sub-bgcolor{
+background:#FFCF56;
+}

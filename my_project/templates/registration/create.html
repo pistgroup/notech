@@ -1,0 +1,23 @@
+{% extends 'my_apps/base.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="card card-container">
+            <form class="form-signin" action="" method="POST">
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+                    {{ field.errors }}
+                    {{ field }}
+
+                </div>
+                {% endfor %}
+                {% csrf_token %}
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">無料登録する</button>
+            </form>
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+
+{% endblock %}
