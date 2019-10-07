@@ -1,0 +1,710 @@
+{% extends 'my_apps/base.html' %}
+{% load static %}
+{% block meta %}
+<meta name="description" content="">
+<meta name="author" content="">
+<title>{{service.user.profile.user_name}}さんが育てた{{ service.category }}|{{ site_title }}</title>
+{% endblock %}
+{% block bodyclass %}
+single-video
+{% endblock %}
+{% block content %}
+
+
+
+<div class="content-wrapper">
+    <div class="container single-wrapper">
+        <div class="row">
+             <h1 class="d1-color font-weight">{{ service.title }}</h1>
+            <div class="sv-views-stats pb-20">
+                                <div class="service-rating">
+                                    <span class="star font-weight">{{ service.avg_rating }}</span>
+                                        {% if service.avg_rating > 0 %}
+                                       <i class="material-icons star">star</i>
+                                        {% else %}
+                                        <i class="material-icons star">star_border</i>
+                                        {% endif %}
+                                        {% if service.avg_rating > 1 %}
+                                       <i class="material-icons star">star</i>
+                                        {% else %}
+                                         <i class="material-icons star">star_border</i>
+                                        {% endif %}
+                                        {% if service.avg_rating > 2 %}
+                                       <i class="material-icons star">star</i>
+                                        {% else %}
+                                        <i class="material-icons star">star_border</i>
+                                        {% endif %}
+                                        {% if service.avg_rating > 3 %}
+                                       <i class="material-icons star">star</i>
+                                        {% else %}
+                                        <i class="material-icons star">star_border</i>
+                                        {% endif %}
+                                        {% if service.avg_rating > 4 %}
+                                       <i class="material-icons star">star</i>
+                                        {% else %}
+                                       <i class="material-icons star">star_border</i>
+                                        {% endif %}
+                                    <span class="d3-color">({{comment_count}})</span>
+                                </div>
+                            </div>
+            <div class="acide-panel acide-panel-top">
+                   <form action="{% url 'my_apps:favorite' service.pk %}" method="post">
+                    <button type="submit"><i class="material-icons">favorite{{ favorite_active }}</i>お気に入り</button>
+                   {% csrf_token %}
+                    </form>
+            </div>
+
+                <div class="info col-sm-8">
+                    <div class="custom-tabs">
+                        <div class="tabs-panel">
+                            <a href="#" class="active">
+                                <i class="cv cvicon-cv-about" data-toggle="tooltip" data-placement="top" title="About"></i>
+                                <span>商品紹介</span>
+                            </a>
+                            <a href="/#id-2">
+                                <i class="material-icons cv">local_mall</i>
+                                <span>規格</span>
+                            </a>
+                             <a href="/#id-2">
+                                <i class="material-icons cv">local_mall</i>
+                                <span>注意事項</span>
+                            </a>
+                            <a href="/#id-3">
+                                 <i class="cv cvicon-cv-share" data-toggle="tooltip" data-placement="top" title="Share"></i>
+                                <span>レビュー</span>
+
+                            </a>
+
+                            <div class="acide-panel hidden-xs">
+                                  <form action="{% url 'my_apps:favorite' service.pk %}" method="post">
+                                      <button type="submit" class="service-favorite"><i class="material-icons">favorite{{ favorite_active }}</i>お気に入り<span class="ml-10 font-weight d3-color">{{service.favorite_count}}</span></button>
+                                   {% csrf_token %}
+                                  </form>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <!-- BEGIN tabs-content -->
+                        <div class="service-box-wrapper">
+                            <!-- BEGIN tab-1 -->
+                            <div class="tab-1 box-tab">
+                                <div class="grad-wrap pt-20">
+                                    <input id="trigger1" class="grad-trigger" type="checkbox">
+                                    <label class="grad-btn" for="trigger1"></label>
+                                    <div class="grad-item">
+                                        <div class="col-lg-8 col-xs-12 col-sm-8">
+                                            <div id="slider" class="swiper-container">
+                                              <div class="swiper-wrapper">
+                                                  {% if service.image01.medium.url %}
+                                                    <div class="swiper-slide">
+                                                        <img src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                    </div>
+                                                  {% else %}
+                                                  <div class="swiper-slide">
+                                                      <img src="/media/service/no-image.medium.png">
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if service.image02.medium.url %}
+                                                    <div class="swiper-slide">
+                                                        <img src="{{ service.image02.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                    </div>
+                                                   {% else %}
+                                                  <div class="swiper-slide">
+                                                      <img src="/media/service/no-image.medium.png">
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if service.image03.medium.url %}
+                                                    <div class="swiper-slide">
+                                                        <img src="{{ service.image03.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                    </div>
+                                                   {% else %}
+                                                  <div class="swiper-slide">
+                                                      <img src="/media/service/no-image.medium.png">
+                                                  </div>
+                                                  {% endif %}
+                                                  {% if service.image04.medium.url %}
+                                                  <div class="swiper-slide">
+                                                        <img src="{{ service.image04.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                  </div>
+                                                   {% else %}
+                                                  <div class="swiper-slide">
+                                                      <img src="/media/service/no-image.medium.png">
+                                                  </div>
+                                                  {% endif %}
+
+                                              </div>
+                                              <div class="swiper-button-prev swiper-button-white"></div>
+                                              <div class="swiper-button-next swiper-button-white"></div>
+                                            </div>
+
+                                            <div id="thumbs" class="swiper-container">
+                                                 <div class="swiper-wrapper">
+                                                      {% if service.image01.medium.url %}
+                                                        <div class="swiper-slide">
+                                                            <img src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                        </div>
+                                                      {% else %}
+                                                        <div class="swiper-slide">
+                                                            <img src="/media/service/no-image.medium.png">
+                                                        </div>
+                                                      {% endif %}
+                                                      {% if service.image02.medium.url %}
+                                                        <div class="swiper-slide">
+                                                            <img src="{{ service.image02.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                        </div>
+                                                     {% else %}
+                                                          <div class="swiper-slide">
+                                                              <img src="/media/service/no-image.medium.png">
+                                                          </div>
+                                                      {% endif %}
+                                                      {% if service.image03.medium.url %}
+                                                        <div class="swiper-slide">
+                                                            <img src="{{ service.image03.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                        </div>
+                                                     {% else %}
+                                                          <div class="swiper-slide">
+                                                              <img src="/media/service/no-image.medium.png">
+                                                          </div>
+                                                      {% endif %}
+                                                      {% if service.image04.medium.url %}
+                                                     <div class="swiper-slide">
+                                                         <img src="{{ service.image04.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜{{ site_title }}">
+                                                     </div>
+                                                     {% else %}
+                                                     <div class="swiper-slide">
+                                                         <img src="/media/service/no-image.medium.png">
+                                                     </div>
+                                                      {% endif %}
+                                                 </div>
+                                            </div>
+                                         </div>
+                                        <p>{{ service.text | linebreaksbr }}</p>
+                                    </div>
+                                </div>
+                                <div class="hidden-xs">
+                                    <div class="author">
+                                        <div class="author-head user-profile text-center">
+                                            <img src="{{ service.user.profile.image_profile.medium.url }}" alt="" class="sv-avatar">
+                                            <div class="text-center">
+                                                <div>生産者：{{ service.user.profile.user_name }}</div>
+                                                <div class="c-sub hidden-xs font-mini d3-color">
+                                                    {{ service.user.profile.user_text }}
+
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="author-btn-add"><i class="cv cvicon-cv-plus"></i></a>
+                                        </div>
+                                        <div class="author-border"></div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- END tab-1 -->
+
+                            <!-- BEGIN tab-2 -->
+                           <div class="tab-2" id="tab-2">
+                               <div>
+                                   <h2>タグ :</h2>
+                                    <p class="sv-tags">
+                                        {% for categorytags in service.categorytags.all %}
+                                        <span>{{ categorytags }}</span>
+                                       {% endfor %}
+                                    </p>
+                                    <h2>品種:</h2>
+                                   {% for tags in service.tags.all %}
+                                    <p>{{ tags }}</p>
+                                   {% endfor %}
+
+                                    <h2>生産地:</h2>
+                                    <p>{{ service.user.profile.user_from }}</p>
+
+                                    <h2>注意事項:</h2>
+                                    <p>ココに注意事項</p>
+
+                                </div>
+                            </div>
+                            <!-- END tab-2 -->
+
+                            <!-- BEGIN tab-3 -->
+                             <div class="tab-3" id="tab-3">
+                                <h2>このページをSNSで共有する:</h2>
+                                <div class="social">
+                                    <a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#" class="twitter"><i class="fa fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                    <a href="#" class="pinterest"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h2 >リンクをコピーする:</h2>
+                                        <label class="clipboard">
+                                            <input type="text" name="#" class="share-link" value="{{ request.build_absolute_uri }}" readonly>
+                                            <div class="btn-copy" data-clipboard-target=".share-link"><i class="material-icons">file_copy</i></div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="tab-popup popup-share">
+                                    <div class="tab-popup-head">
+                                        <i class="cv cvicon-cv-share"></i>
+                                        <span>Share this video</span>
+                                        <a href="#" class="tab-popup-close"><i class="cv cvicon-cv-cancel"></i></a>
+                                    </div>
+                                    <div class="tab-popup-content">
+                                        <h2>Copy Link:</h2>
+                                        <label class="clipboard">
+                                            <input type="text" name="#" class="share-link" value="http://youtu.be/DwGgdfe-C6c" readonly>
+                                            <div class="btn-copy" data-clipboard-target=".share-link">Copy</div>
+                                        </label>
+                                    </div>
+                                    <div class="tab-popup-content">
+                                        <div class="popup-share-social">
+                                            <a href="#" class="facebook">
+                                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                                                <span>Facebook</span>
+                                            </a>
+                                            <a href="#" class="twitter">
+                                                <i class="fa fa fa-twitter" aria-hidden="true"></i>
+                                                <span>Twitter</span>
+                                            </a>
+                                            <a href="#" class="google">
+                                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                                <span>Google Plus</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- END tab-3 -->
+
+                        </div>
+                        <!-- END tabs-content -->
+                    </div>
+                </div>
+                     <div class="col-lg-4 col-xs-12 col-sm-4">
+
+                        <div class="author">
+
+                            <div class="author-border"></div>
+                            <div class="sv-views">
+                                <div class="sv-views-count">
+
+                                    <div class="clearfix"></div>
+
+                                    <p class="font-mini d2-color">参考市場価格:¥350</p>
+                                    <span class="font-weight">¥{{ service.amount }}</span>
+                                    <span class="font-mini d3-color">/{{service.unit}}</span>
+                                     <a href="{% url 'cart:add_cart' service.pk %}" class="service-btn btn btn-def">
+                                 購入画面に進む<span class="right" ><i class="material-icons">arrow_right</i></span>
+                                    </a>
+                                    <p class="font-mini d2-color">生産地:{{ service.user.profile.user_from }}</p>
+                                    <p class="font-mini d2-color">送料:通常配送無料</p>
+                                    <p class="font-mini d2-color">発送時期:{{ service.delivery_date }}</p>
+                                    <p class="font-mini d2-color">カテゴリー:{{ service.category }}</p>
+                                </div>
+                                <div class="progress sv-views-progress">
+                                  <div class="progress-bar sv-views-progress-bar" role="progressbar" style="width: 41%" aria-valuenow="41" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="content-block head-div head-arrow head-arrow-top visible-xs">
+                        <div class="head-arrow-icon">
+                            <i class="cv cvicon-cv-next"></i>
+                        </div>
+                    </div>
+
+                    <div class="adblock2">
+                         <a href="{% url 'cart:add_cart' service.pk %}" class="btn btn-def">
+                         ¥{{ service.amount }}で購入する<span class="right" ><i class="material-icons">arrow_right</i></span>
+                         </a>
+                    </div>
+
+                    <!-- similar videos -->
+                    <div class="caption hidden-xs">
+                        <div class="left">
+                            関連商品
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="single-v-footer">
+                        <div class="single-v-footer-switch">
+                            <a href="#" class="active" data-toggle=".similar-v">
+                                <i class="cv cvicon-cv-play-circle"></i>
+                                <span>関連商品</span>
+                            </a>
+                            <a href="#" data-toggle=".comments">
+                                <i class="cv cvicon-cv-comment"></i>
+                                <span>レビュー</span>
+                            </a>
+                        </div>
+                        <div class="similar-v single-video video-mobile-02">
+                            <div class="row">
+                                {% for service in service_list|slice:"1:4" %}
+                                    <div class="col-lg-3 col-sm-4 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                {{ service.amount }}円/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    {% for service in service_list|slice:":4" %}
+                                    <div class="col-lg-3 col-sm-3 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                {{ service.amount }}円/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                            </div>
+                        </div>
+                        <!-- END similar videos -->
+                        <!-- comments -->
+                        <div class="comments">
+                            <div class="reply-comment">
+                                <div class="rc-header"><i class="cv cvicon-cv-comment"></i> <span class="semibold"></span>レビューを投稿する</div>
+                                <div class="rc-ava user-profile"><img src="{{ user.profile.image_profile.thumbnail.url }}" alt=""></div>
+                                <div class="rc-comment">
+
+                                    <form action="{% url 'my_apps:comments' service.pk %}" method="post">
+
+                                        <div class="rating"></div>
+                                        <script>
+    $(function() {
+        var options = {
+        symbols: {star:{
+            base: '<i class="material-icons">star_border</i>',
+            hover: '<i class="material-icons">star</i>',
+            selected: '<i class="material-icons">star</i>',}
+            },
+            selected_symbol_type: 'star',
+            max_value: 5,
+            step_size: 1,
+            initial_value: 0,
+            cursor: 'default',
+            readonly: false,
+            change_once: false, // Determines if the rating can only be set once
+        }
+
+        var $rating = $(".rating");
+        var $rating_input = $('#id_rating');
+
+        $rating.rate(options);
+        $rating.on('change', function() {
+            $rating_input.val(parseInt($(this).rate('getValue')));
+        });
+    });
+</script>
+                                        {{ comments }}
+                                        <button type="submit">
+                                            <i class="cv cvicon-cv-add-comment"></i>
+                                        </button>
+                                         {% csrf_token %}
+                                    </form>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="comments-list">
+
+                                <div class="cl-header">
+                                    <div class="c-nav">
+                                        <ul class="list-inline">
+                                            <li>評価レビュー</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- comment -->
+                                {% for comment in comment_list %}
+                                <div class="cl-comment">
+                                    <div class="cl-avatar user-profile">
+                                        <a href="{% url 'accounts:profile_detail' user.pk %}">
+                                            <img src="{{ comment.user.profile.image_profile.thumbnail.url }}" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="cl-comment-text">
+                                        <div class="cl-name-date">
+                                             {% if comment.rating > 0 %}
+                                    <i class="material-icons">star</i>
+                                    {% else %}
+                                   <i class="material-icons">star_border</i>
+                                    {% endif %}
+                                    {% if comment.rating > 1 %}
+                                    <i class="material-icons">star</i>
+                                    {% else %}
+                                    <i class="material-icons">star_border</i>
+                                    {% endif %}
+                                    {% if comment.rating > 2 %}
+                                   <i class="material-icons">star</i>
+                                    {% else %}
+                                    <i class="material-icons">star_border</i>
+                                    {% endif %}
+                                    {% if comment.rating > 3 %}
+                                   <i class="material-icons">star</i>
+                                    {% else %}
+                                    <i class="material-icons">star_border</i>
+                                    {% endif %}
+                                    {% if comment.rating > 4 %}
+                                    <i class="material-icons">star</i>
+                                    {% else %}
+                                    <i class="material-icons">star_border</i>
+                                {% endif %}by
+                                            <a href="{% url 'my_apps:index' %}">
+                                                {% if comment.user.profile.user_name %}
+                                                {{ comment.user.profile.user_name }}
+                                                {% else %}
+                                                匿名
+                                                {% endif %}
+                                            </a>
+                                            {{ comment.dates }}
+                                        </div>
+                                        <div class="cl-text">{{ comment.text | linebreaksbr }}</div>
+                                        {% with reply_list=comment.servicecomments_set.all %}
+                                            {% include 'my_apps/reply.html' %}
+                                        {% endwith %}
+                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 121</span> <span class="grey"><span class="circle"></span> 2</span>
+                                        </div>
+                                        <div class="cl-flag">
+                                            <a href="{% url 'my_apps:reply_create' comment.pk %}" class="d3-color">
+                                                <i class="cv material-icons">reply</i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!-- END comment -->
+                                {% endfor %}
+
+                                <!-- reply comment
+                                <div class="cl-comment-reply">
+                                    <div class="cl-avatar"><a href="#"><img src="images/ava7.png" alt=""></a></div>
+                                    <div class="cl-comment-text">
+                                        <div class="cl-name-date"><a href="#">kingPIN</a> . 6 days ago</div>
+                                        <div class="cl-text"> I was stuck too. then I started to shoot everything in Doom.</div>
+                                        <div class="cl-meta"><span class="green"><span class="circle"></span> 70</span> <span class="grey"><span class="circle"></span> 9</span> . <a href="#">Reply</a></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                               END reply comment -->
+
+                            </div>
+                        </div>
+                        <!-- END comments -->
+                    </div>
+                </div>
+                <div class="content-block head-div head-arrow visible-xs">
+                    <div class="head-arrow-icon">
+                        <i class="cv cvicon-cv-next"></i>
+                    </div>
+                    <div class="adblock2 adblock2-v2">
+                        <div class="img">
+                            <span>Google AdSense 300 x 250</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            <!-- right column -->
+            <div class="col-lg-4 col-xs-12 col-sm-12 hidden-xs">
+
+                <!-- up next -->
+                <div class="caption">
+                     <div class="left">
+                        <a href="#">地元農家から探す</a>
+                    </div>
+                    <div class="right">
+                        <a href="#">もっと見る</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="list">
+                    {% if request.user.profile.user_from and service.cetegory %}
+                    {{ service.category }}
+                    {% endif %}
+                     {% for service in service_list|slice:"1:4" %}
+                                    <div class="col-lg-3 col-sm-4 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>
+                                                        {{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                {{ service.amount }}円/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="clearfix"></div>
+                                    {% for service in service_list|slice:":4" %}
+                                    <div class="col-lg-3 col-sm-3 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                {{ service.amount }}円/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                     <div class="clearfix"></div>
+                </div>
+                <!-- END up next -->
+
+                <div class="adblock">
+                    <div class="img">
+                        広告バナー<br>
+                        1280 x 500
+                    </div>
+                </div>
+
+                <!-- Recomended Videos -->
+                <div class="caption">
+                    <div class="left">
+                        <a href="#">同じカテゴリーから探す</a>
+                    </div>
+                    <div class="right">
+                        <a href="#">もっと見る</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="list">
+                    <div class="row">
+                       {% for service in service_list|slice:"1:4" %}
+                                    <div class="col-lg-3 col-sm-4 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                {{ service.amount }}円/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="clearfix"></div>
+                                    {% for service in service_list|slice:":4" %}
+                                    <div class="col-lg-3 col-sm-3 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                {{ service.amount }}円/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <!-- END Recomended Videos -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

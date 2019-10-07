@@ -1,0 +1,191 @@
+{% extends 'my_apps/base.html' %}
+{% load static %}
+{% block meta %}
+<meta name="description" content="">
+<meta name="author" content="">
+<title>購入者設定|{{ site_title }}</title>
+{% endblock %}
+{% block bodyclass %}
+channel user-system-buy
+{% endblock %}
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="channel-details">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-2 col-xs-12">
+                            <div class="c-details">
+                                <div class="c-name d1-color font-weight">
+                                    {% if profile %}
+                                    {{ profile.user_name }}
+                                    {% else %}
+                                    <a href="{% url 'accounts:profile_create' %}" class="font-mini">
+                                        <div class="alert alert-danger" role="alert">
+                                          <i class="material-icons">report</i>
+                                        アカウント設定を完了してください
+                                        </div>
+
+                                    </a>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="c-nav">
+                                    <ul class="list-inline hidden-xs d2-color">
+                                        <li class="active"><a href="#channel-tabsA" data-toggle="tab">購入履歴</a></li>
+                                        <li><a href="#channel-tabsB" data-toggle="tab">フォロー</a></li>
+                                        <li><a href="#channel-tabsC" data-toggle="tab">設定</a></li>
+                                    </ul>
+
+                                    <div class="btn-group dropdown pull-right">
+                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="#channel-tabsA" data-toggle="tab">購入履歴</a></li>
+                                            <li><a href="#channel-tabsB" data-toggle="tab">フォロー</a></li>
+                                            <li><a href="#channel-tabsC" data-toggle="tab">設定</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="c-sub pull-right">
+                                    <div class="c-sub-wrap">
+                                        <div class="c-f">
+                                            フォロー
+                                        </div>
+                                        <div class="c-s">
+                                            145
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Featured Videos -->
+                <div class="content-block">
+                    <!-- タブ内容 -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="channel-tabsA">
+                            <div class="cb-content newslist">
+                                <div class="row">
+                                      <table class="table table-striped">
+                                          <tbody>
+                                          {% for buy in buyinghistory_list %}
+                                          {% for d in buy.service.all %}
+                                          {% if buy.user == request.user %}
+                                            <tr>
+                                              <td>{{ buy.date }}</td>
+                                              <td>
+                                                  {{ d.title }}
+                                              </td>
+                                              <td>{{ buy.is_send }}</td>
+                                              <td><a href="#">¥{{ buy.price }}</a></td>
+                                            </tr>
+                                          {% endif %}
+                                          {% endfor %}
+                                          {% endfor %}
+
+                                          </tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="channel-tabsB">
+                            <div class="cb-content videolist">
+                                <div class="row">
+                                    {% for service in service_list|slice:"1:3" %}
+                                    <div class="col-lg-3 col-sm-6 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                ¥{{ service.amount }}/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    {% for service in service_list|slice:":3" %}
+                                    <div class="col-lg-3 col-sm-3 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                               ¥ {{ service.amount }}/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="channel-tabsC">
+                           <table class="channel-table">
+                              <tr>
+                                <th>販売者名</th>
+                                <td>{{ service.user.profile.user_name }}</td>
+                              </tr>
+                              <tr>
+                                <th>生産地</th>
+                                <td>{{ service.user.profile.derivary_date }}</td>
+                              </tr>
+                              <tr>
+                                <th>取扱品種</th>
+                                <td>トマト</td>
+                              </tr>
+                            </table>
+                                <a href="#" class="btn btn-def">
+                                    <div>
+                                    生産者に問い合わせる
+                                    </div>
+                                </a>
+
+                        </div>
+                    </div>
+                    <!-- Featured Videos -->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

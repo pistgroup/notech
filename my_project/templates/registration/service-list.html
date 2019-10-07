@@ -1,0 +1,126 @@
+{% extends "my_apps/base.html" %}
+{% load static %}
+{% block content %}
+ <section class="section-wrap pt-20 pb-20 mypage">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-lg-9 mb-40 order-2">
+ <ul class="nav nav-tabs nav-fill">
+    <li class="nav-item">
+      <a href="#tab1" class="nav-link active" data-toggle="tab">取引</a>
+    </li>
+    <li class="nav-item">
+      <a href="#tab2" class="nav-link" data-toggle="tab">ダイレクトメッセージ</a>
+    </li>
+  </ul>
+
+  <!--タブのコンテンツ部分-->
+  <div class="tab-content">
+    <div id="tab1" class="tab-pane active">
+       <div class="row row-8 frame">
+              <table class="table table-striped">
+                <tbody>
+                {% for service in service_list %}
+                  <tr>
+                    <th scope="row"><a href="{% url 'my_apps:service_detail' service.pk %}" >{{ service.title }}</a></th>
+                    <td>
+                      <div class="user-profile">
+                      <img src="{{ service.user.profile.image.thumbnail.url }}">
+                        {{ service.user.profile.user }}
+                       </div>
+                    </td>
+                    <td>Otto</td>
+                  </tr>
+                {% endfor %}
+                 </tbody>
+              </table>
+           {% include 'my_apps/pagination.html' %}
+            </div> <!-- end row -->
+    </div>
+    <div id="tab2" class="tab-pane">
+      <div class="row row-8 frame">
+              <table class="table table-striped">
+                <thead class="thead-light">
+                  <tr>
+                    <th>タイトル</th>
+                    <th>出品者</th>
+                    <th>提案数</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for service in service_list %}
+                  <tr>
+                    <th scope="row"><a href="{% url 'my_apps:service_detail' service.pk %}" >{{ service.title }}</a></th>
+                    <td>
+                      <div class="user-profile">
+                      <img src="{{ service.user.profile.image.thumbnail.url }}">
+                        {{ service.user.profile.user }}
+                       </div>
+                    </td>
+                    <td>Otto</td>
+                  </tr>
+                {% endfor %}
+                 </tbody>
+              </table>
+           {% include 'my_apps/pagination.html' %}
+            </div> <!-- end row -->
+    </div>
+  </div>
+</div> <!-- end col -->
+      <!-- Sidebar -->
+          <aside class="col-lg-3 sidebar left-sidebar frame order-0">
+           <div class="user-profile text-center">
+                    {% if user.profile.image_profile %}
+                      <img src="{{ user.profile.image_profile.medium.url }}">
+                    {% else %}
+                      <i class="material-icons">account_circle</i>
+                    {% endif %}
+               <br>
+                    {% if user.profile.image_profile %}
+                    <span class="font-large">{{ user.profile.user_nickname }}</span>
+                    {% else %}
+                    <span class="font-large">{{ user.email }}</span>
+                    {% endif %}
+               <br>
+               {% if user.is_authenticated %}
+               <span class="text-center"><a href="{% url 'accounts:profile_update' user.pk %}">プロフィール編集</a></span>
+                {% endif %}
+           </div>
+
+
+            <div class="widget widget_categories widget--bottom-line mt-10">
+              <h3 class="widget-title">出品者メニュー</h3>
+              <ul>
+                <li>
+                  <a href="{% url 'my_apps:service_list' %}">出品したサービス</span></a>
+                </li>
+                <li>
+                  <a href="{% url 'my_apps:service_list' %}">売上管理</a>
+                </li>
+                <li>
+                  <a href="{% url 'my_apps:service_list' %}">フォロワー</a>
+                </li>
+              </ul>
+            </div>
+          　<div class="widget widget_categories widget--bottom-line">
+              <h3 class="widget-title">購入者メニュー</h3>
+              <ul>
+                <li>
+                  <a href="{% url 'my_apps:service_list' %}">購入したサービス</a>
+                </li>
+                <li>
+                  <a href="{% url 'my_apps:service_list' %}">フォロー</a>
+                </li>
+              </ul>
+          　</div>
+          </aside> <!-- end sidebar -->
+
+
+
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end catalog -->
+
+{% endblock %}

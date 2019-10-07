@@ -1,27 +1,40 @@
   <!-- Sidebar -->
-          <aside class="col-lg-3 sidebar left-sidebar frame">
-           <div class="user-profile text-center">
+          <aside class="col-sm-3 col-md-offset-1 sidebar channel-details frame">
+           <div class="user-profile text-center c-details">
                     {% if user.profile.image_profile %}
                       <img src="{{ user.profile.image_profile.medium.url }}">
                     {% else %}
-                      <i class="material-icons">account_circle</i>
+                      <i class="material-icons d3-color">account_circle</i>
                     {% endif %}
                <br>
                     {% if user.profile.image_profile %}
                     <span class="font-large">{{ user.profile.user_nickname }}</span>
                     {% else %}
-                    <span class="font-large">{{ user.email }}</span>
+                    <p class="font-large">{{ user.email }}</p>
                     {% endif %}
+                    {% for buy in profile_list %}
+                    {% if buy.user == request.user %}
+                    <a class="blue font-mini" href="{% url 'accounts:profile_create' %}">
+                        アカウント情報を作成<i class="material-icons">person_add</i>
+                    </a>
+                    {% else %}
+                    <a class="blue" href="{% url 'accounts:profile_update' buy.pk %}">
+                        アカウント情報を編集<i class="material-icons">person_add</i>
+                    </a>
+                    {% endif %}
+               {% endfor %}
 
            </div>
 
 
-            <div class="widget widget_categories widget--bottom-line mt-10">
-              <h4 class="widget-title">出品者メニュー</h4>
-              <ul>
-                <li>
-                  <a href="#">出品したサービス</a>
-                </li>
+            <div class="widget mt-30">
+              <p class="widget-title">出品者メニュー</p>
+              <ul class="side-list">
+
+                  <li>
+                      <a href="#">出品したサービス</a>
+                  </li>
+
                 <li>
                   <a href="#">売上管理</a>
                 </li>
@@ -30,9 +43,9 @@
                 </li>
               </ul>
             </div>
-          　<div class="widget widget_categories widget--bottom-line mt-10">
-              <h4 class="widget-title">購入者メニュー</h4>
-              <ul>
+          　<div class="widget mt-10">
+              <p class="widget-title">購入者メニュー</p>
+              <ul class="side-list">
                 <li>
                   <a href="#">購入したサービス</a>
                 </li>

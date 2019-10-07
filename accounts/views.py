@@ -12,7 +12,10 @@ from django.template.loader import get_template
 from django.views import generic
 from .forms import LoginForm, UserCreateForm, ProfileCreateForm, ProfileUpdateForm
 from .models import Profile, Follow
-User = get_user_model()
+from my_apps.models import Service, CategoryTags
+from cart.models import BuyingHistory
+from django.contrib import messages
+
 
 class Login(LoginView):
     """ログインページ"""
@@ -85,6 +88,7 @@ class UserCreateComplete(generic.TemplateView):
         else:
             try:
                 user = User.objects.get(pk=user_pk)
+
             except User.DoesNotExist:
                 return HttpResponseBadRequest()
             else:
@@ -104,7 +108,7 @@ class OnlyYouMixin(UserPassesTestMixin):
         return user.pk == self.kwargs['pk'] or user.is_superuser
 
 
-def profilecreate(request):
+def ProfileCreate(request):
     form = ProfileCreateForm(request.POST or None)
     if form.is_valid():
         test = form.save(commit=False)
@@ -116,9 +120,17 @@ def profilecreate(request):
     }
     return render(request, 'my_apps/form.html', context)
 
+class ProfileListView(generic.ListView):
+    model = Profile
+    template_name = 'my_apps/categories.html'
+    paginate_by = 1
+
+   # def get_queryset(self):
+    #    return Service.objects.filter(user=self.request.user)
+
 class ProfileDetail(generic.DetailView):
     model = Profile
-    template_name = 'registration/user_detail.html'
+    template_name = 'my_apps/channel-mypage.html'
 
 
 class ProfileUpdate(OnlyYouMixin, generic.UpdateView):
@@ -127,13 +139,34 @@ class ProfileUpdate(OnlyYouMixin, generic.UpdateView):
     template_name = 'my_apps/form.html'
     success_url = reverse_lazy('my_apps:index')
 
-def followPlace(request, pk):
-    """場所をお気に入り登録する"""
-    follow = get_object_or_404(Follow, pk=pk)
-    context = {
-        'follow_list': Follow.objects.all(),
-        'profile_list': Profile.objects.all(),
-    }
-    request.user.user_follow.add(follow)
-    return redirect('myapp:index', context)
+class UserSystem(generic.TemplateView):
+    model = BuyingHistory
+    template_name = 'my_apps/user-system.html'
 
+
+class UserSystemService(generic.TemplateView):
+    model = Profile
+    template_name = 'my_apps/user-system-service.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['buyinghistory_list']= BuyingHistory.objects.all()
+        context['profile_l'] = Profile.objects.filter(user=self.request.user)
+        print(context)
+        return context
+
+class UserSystemBuy(generic.ListView):
+    model = BuyingHistory
+    template_name = 'my_apps/user-system-buy.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        return context
+
+class Followadd(generic.CreateView):
+    model = Follow
+
+
+class FollowList(generic.ListView):
+    model = Follow
+    template_name = 'my_apps/categories.html'

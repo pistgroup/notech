@@ -5,7 +5,6 @@ from .models import Profile
 
 User = get_user_model()
 
-
 class LoginForm(AuthenticationForm):
     """ログインフォーム"""
 
@@ -39,7 +38,7 @@ class ProfileCreateForm(forms.ModelForm):
         model = Profile
         fields = ('user_name','user_nickname','image_profile','image_cover','user_from','user_address','user_text')
         widgets = {
-        'title': forms.TextInput(attrs={
+        'user_text': forms.TextInput(attrs={
             'class': 'form-control',
             'placeholder': 'わからないこと、解決したいことを10文字以上で書いてください',
         }),
@@ -51,8 +50,10 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('user_name','user_nickname','image_profile','image_cover','user_from','user_address','user_text')
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
 

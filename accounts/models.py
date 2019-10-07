@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from django.contrib.auth.base_user import BaseUserManager
 from stdimage.models import StdImageField  #追記
-from my_apps.models import Service
+from my_apps.models import Service, ServiceFavorite
 
 class UserManager(BaseUserManager):
     """ユーザーマネージャー."""
@@ -51,6 +51,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('メールアドレス'), unique=True)
     first_name = models.CharField(_('性'), max_length=30, blank=True)
     last_name = models.CharField(_('名'), max_length=30, blank=True)
+    is_favorite = models.ManyToManyField(ServiceFavorite, related_name="favorite")
 
 
     is_staff = models.BooleanField(
@@ -155,6 +156,7 @@ FROM_CHOICE = (
 
 class UserInfomation(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+    service = models.ForeignKey(Service, verbose_name='投稿サービス', on_delete=models.PROTECT),
     image01 = StdImageField('カバー画像1枚目', upload_to='img/', blank=True, variations={
         'medium': {"width": 400, "height": 400, "crop": True},
         'cover': {"width": 1920, "height": 720, "crop": True},
@@ -165,16 +167,15 @@ class UserInfomation(models.Model):
         'cover': {"width": 1920, "height": 720, "crop": True},
     })
     text02 = models.TextField('テキスト2枚目', blank=True)
-    service = models.ForeignKey(Service, verbose_name='投稿サービス', on_delete=models.PROTECT),
+
 
 """場所の情報"""
 class Follow(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    is_follow = models.BooleanField(_('フォロー'), default=False,)
-
+    service = models.ManyToManyField(Service, verbose_name='紐づく商品')
+    date = models.DateTimeField('更新日', default=timezone.now)
     def __str__(self):
-        return self.user.email
-
+        return self.user
 
 class Profile(models.Model):
     '''個人情報'''
@@ -188,12 +189,12 @@ class Profile(models.Model):
     image_cover = StdImageField('カバー画像', upload_to='img/', blank=True, variations={
         'cover': {"width": 1920, "height": 720, "crop": True},
     })
-    user_from = models.CharField('居住エリア', max_length=15, choices=FROM_CHOICE)
-    user_address = models.CharField('配達先', max_length=300, blank=True)
+    user_from = models.CharField('都道府県', max_length=15, choices=FROM_CHOICE)
+    user_address = models.CharField('住所', max_length=300, blank=True)
     user_text = models.TextField('自己紹介(160文字以内)', blank=True, max_length=160)
-    user_follow = models.ManyToManyField(Follow, verbose_name='フォロー', blank=True, null=True)
     user_cleate_date = models.DateTimeField('作成日', default=timezone.now)
     user_update_date = models.DateTimeField('更新日', auto_now=True)
+
 
     def __str__(self):
         return '{0}{1}'.format(self.user_address, self.user_update_date)

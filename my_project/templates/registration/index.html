@@ -1,0 +1,118 @@
+{% extends 'my_apps/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Hero Slider -->
+
+    <section class="hero">
+      <div id="owl-hero" class="owl-carousel owl-theme owl-carousel--dots-inside">
+
+        <div class="hero__slide" style="background-image: url({% static 'images/hero/1.jpg' %})">
+          <!--
+          <div class="container text-center">
+            <h1 class="hero__title">Got the style? Show us</h1>
+            <a href="single-product.html" class="hero__link">Shop Now</a>
+          </div>
+          -->
+        </div>
+
+        <div class="hero__slide" style="background-image: url({% static 'images/hero/2.jpg' %})">
+          <!--
+          <div class="container relative">
+            <div class="hero__holder">
+              <h1 class="hero__title-1">dope<br>street<br>wear</h1>
+              <a href="single-product.html" class="hero__link-1 btn btn-lg btn-dark"><span>New Arrivals</span></a>
+            </div>
+          </div>
+          -->
+        </div>
+
+        <div class="hero__slide" style="background-image: url({% static 'images/hero/3.jpg' %})">
+          <!--
+          <div class="container text-center">
+            <div class="hero__holder-1">
+              <h1 class="hero__title-2">new lookbook</h1>
+              <h3 class="hero__subtitle">Sale 50% off. Get only trendy items</h3>
+              <a href="single-product.html" class="hero__link-1 btn btn-lg btn-color"><span>Shop the trend</span></a>
+            </div>
+          </div>
+          -->
+        </div>
+
+      </div> <!-- end owl -->
+    </section> <!-- end hero slider -->
+
+
+    <!-- Best Seller -->
+    <section class="section-wrap pb-30">
+      <div class="container">
+
+        <div class="heading-row">
+          <div>
+            <h2 class="heading">
+              最新の
+
+            </h2>
+          </div>
+        </div>
+ <div class="row">
+     <p>{{ object_list.maxamount2.amount__max }}</p>
+{{ total }}
+     {% for service in service_list %}
+
+    <div class="col-sm-3">
+       <div class="card contents-card">
+           <div class="img-box">
+              <a href="{% url 'my_apps:service_detail' service.pk %}">
+                  {% if service.image01.medium.url %}
+                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                  {% else %}
+                      <img src="/media/service/no-image.medium.png">
+                  {% endif %}
+              </a>
+                {% for profile in profile_list %}
+                <a href="{% url 'accounts:profile_detail' profile.pk %}">
+                    <div class="user-profile">
+                        {% if profile.image_profile %}
+                        <img src="{{ profile.image_profile.medium.url }}">
+                        {% else %}
+                        <i class="material-icons">account_circle</i>
+                        {% endif %}
+                        {{ service.user.profile.user | truncatechars:7}}
+                    </div>
+                </a>
+                {% endfor %}
+           </div>
+
+
+              <div class="card-body">
+
+                  <h3 class="font-mini">
+                      <a href="{% url 'my_apps:service_detail' service.pk %}">
+                          {{ service.title | truncatechars:32 }}
+                      </a>
+                  </h3>
+
+                  <ul class="card-bottom">
+                       <div class="progress">
+                         <div class="progress-bar" style="width: 20%;">在庫</div>
+                       </div>
+                      <li><span>評価</span>4.5</li>
+                      <li><span>単価/{{ service.unit }}</span>¥{{ service.amount }}</li>
+                      <li><span>出荷日</span>{{ service.delivery_date }}</li>
+                  </ul>
+
+              </div>
+           </div>
+        </div>
+
+          {% endfor %}
+              </div>
+      </div> <!-- end container -->
+    </section> <!-- end best seller -->
+
+
+
+
+
+
+{% endblock %}

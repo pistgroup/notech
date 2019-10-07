@@ -1,0 +1,113 @@
+{% extends "my_apps/base.html" %}
+{% load static %}
+{% block content %}
+{% load cart-cross %}
+
+
+<div class="container base-bg">
+        <div class="row mx-auto">
+            <div class="col-sm-8">
+                <table class="table">
+                  <tbody>
+                   {% for cart_item in cart_items %}
+                    <tr>
+                        <td class="user-profile"><img src="{{ cart_item.product.image01.medium.url }}"></td>
+                        <td class="cart-title">{{ cart_item.product.title }}</td>
+                        <td>¥{{cart_item.product.amount}}</td>
+                        <td><a href="{% url 'cart:cart_remove' cart_item.product.pk %}" class="custom_a">
+                              -
+                            </a>{{cart_item.quantity}}
+
+                             <a href="{% url 'cart:cart_plus' cart_item.product.pk %}" class="custom">
+                              +
+                            </a>
+                        </td>
+                        <td>¥{{cart_item.sub_total}}</td>
+                        <td>
+                            <!-- Button trigger modal -->
+
+                               <i class="material-icons cursol" data-toggle="modal" data-target="#exampleModalCentered">cancel</i>
+
+                            <!-- Modal -->
+                            <div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <p class="modal-title" id="exampleModalCenteredLabel">こちらのサービスをカートから完全に削除しますか？</p>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn">
+                                        <a href="{% url 'cart:full_remove' cart_item.product.pk %}" class="btn">
+                                            はい
+                                        </a>
+                                    </button>
+                                    <button type="button" class="btn" data-dismiss="modal">いいえ</button>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- EndModal -->
+                        </td>
+                    </tr>
+
+                   {% endfor %}
+                  </tbody>
+                </table>
+
+
+
+
+
+            </div>
+            <div class="col-sm-4 payment">
+                <table class="table d3-color">
+                    <tr>
+                      <th>小計</th>
+                      <td>¥{{ total | floatformat:0 }}</td>
+                    </tr>
+                    <tr>
+                      <th>消費税</th>
+                      <td>¥{{ total | multiplie:0.1 | floatformat:0 }}</td>
+                    </tr>
+                    <tr>
+                      <th>支払合計</th>
+                      <td class="d1-color font-weight">¥{{ total | multiplie:0.1 | adds:total | floatformat:0 }}</td>
+                    </tr>
+                </table>
+                 <form action="" method="POST">
+                    <script
+                          src="https://checkout.stripe.com/checkout.js"
+                          class="stripe-button"
+                          data-key="{{ publick_key }}"
+                          data-amount="{{ total | multiplie:0.1 | adds:total | floatformat:0 }}"
+                          {% for cart_item in cart_items %}
+                          data-name="{{ site_title }}"
+                          {% endfor %}
+                          data-description="{{ service.user.user_name }}"
+                          {% for profile in profile_list %}
+                          {% if profile.image_profile %}
+                          data-image="{{ profile.image_profile.medium.url }}"
+                          {% else %}
+                          data-image="/static/images/notech.png"
+                          {% endif %}
+                          {% endfor %}
+                          data-locale="ja"
+                          data-currency="jpy"
+                          data-email="{{ user.email }}">
+                    </script>
+                    <script>
+                      $(function() {
+                        $(".stripe-button-el").replaceWith('<button type="submit" class="btn btn-def">購入する<span class="right" ><i class="material-icons">arrow_right</i></span></button>');
+                      });
+                    </script>
+                  {% csrf_token %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

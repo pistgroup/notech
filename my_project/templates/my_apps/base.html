@@ -1,441 +1,326 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-
 <head>
-  <title>農家プラットフォームNotech(ノーテック）</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="">
-
-
-  <link href='http://fonts.googleapis.com/css?family=Questrial:400%7CMontserrat:300,400,700,700i' rel='stylesheet'>
-
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="{% static '/css/font-icons.css' %}">
-  <link rel="stylesheet" href="{% static '/css/style.css' %}">
-  <link rel="stylesheet" href="{% static '/css/global.css' %}">
-  <link rel="stylesheet" href="{% static '/css/color.css' %}">
+    <link rel="icon" href="{% static '/favicon.png' %}">
+    {% block meta %}
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{ site_title }}</title>
+    {% endblock %}
 
 
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.min.css' %}" >
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="shortcut icon" href="{% static '/img/favicon.ico' %}">
-  <link rel="apple-touch-icon" href="{% static '/img/apple-touch-icon.png' %}">
-  <link rel="apple-touch-icon" sizes="72x72" href="{% static '/img/apple-touch-icon-72x72.png' %}">
-  <link rel="apple-touch-icon" sizes="114x114" href="{% static '/img/apple-touch-icon-114x114.png' %}">
+    <!-- Theme CSS -->
+    <link href="{% static '/css/style.css' %}" rel="stylesheet">
+    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/font-circle-video.css' %}" rel="stylesheet">
+    <link href="{% static '/css/global.css' %}" rel="stylesheet">
+    <link href="{% static '/css/color.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Hind:400,300,500,600,700|Hind+Guntur:300,400,500,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css">
+
+    <script src="{% static '/js/jquery.min.js' %}" type="text/javascript"></script>
+
+
+
+
 
 </head>
 
-<body>
+<body class="light {% block bodyclass %}{% endblock %}">
+<!-- logo, menu, search, avatar -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="navbar-container">
+            <div class="container">
+                <div class="row">
 
-  <!-- Preloader -->
-  <div class="loader-mask">
-    <div class="loader">
-      <div></div>
-    </div>
-  </div>
-
-
-  <!-- Mobile Sidenav -->
-  <header class="sidenav" id="sidenav">
-    <!-- Search -->
-    <div class="sidenav__search-mobile">
-      <form method="get" class="sidenav__search-mobile-form">
-        <input type="search" class="sidenav__search-mobile-input" placeholder="Search..." aria-label="Search input">
-        <button type="submit" class="sidenav__search-mobile-submit" aria-label="Submit search">
-          <i class="ui-search"></i>
-        </button>
-      </form>
-    </div>
-
-    <nav>
-      <ul class="sidenav__menu" role="menubar">
-        <li>
-          <a href="#" class="sidenav__menu-link">Men</a>
-          <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
-          <ul class="sidenav__menu-dropdown">
-            <li><a href="#" class="sidenav__menu-link">T-shirt</a></li>
-            <li><a href="#" class="sidenav__menu-link">Hoodie &amp; Jackets</a></li>
-            <li><a href="#" class="sidenav__menu-link">Suits</a></li>
-            <li><a href="#" class="sidenav__menu-link">Shorts</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" class="sidenav__menu-link">Accessories</a>
-          <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
-          <ul class="sidenav__menu-dropdown">
-            <li>
-              <a href="#" class="sidenav__menu-link">All accessories</a>
-              <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
-              <ul class="sidenav__menu-dropdown">
-                <li>
-                  <a href="#" class="sidenav__menu-link">Wallets</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Scarfs</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Shirt</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Shoes</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#" class="sidenav__menu-link">for her</a>
-              <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
-              <ul class="sidenav__menu-dropdown">
-                <li>
-                  <a href="#" class="sidenav__menu-link">Underwear</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Hipster</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Dress</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Hoodie &amp; Jackets</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Tees</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#" class="sidenav__menu-link">for him</a>
-              <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
-              <ul class="sidenav__menu-dropdown">
-                <li>
-                  <a href="#" class="sidenav__menu-link">T-shirt</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Hoodie &amp; Jackets</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Dress</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Suits</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Shorts</a>
-                </li>
-              </ul>
-            </li>
-
-            <li>
-              <a href="#" class="sidenav__menu-link">Watches</a>
-              <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
-              <ul class="sidenav__menu-dropdown">
-                <li>
-                  <a href="#" class="sidenav__menu-link">Smart Watches</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Diving Watches</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Sport Watches</a>
-                </li>
-                <li>
-                  <a href="#" class="sidenav__menu-link">Classic Watches</a>
-                </li>
-              </ul>
-            </li>
-
-          </ul>
-        </li>
-
-        <li>
-          <a href="#" class="sidenav__menu-link">ログイン</a>
-        </li>
-         <li>
-          <a href="{% url 'accounts:signup'%}" class="sidenav__menu-link">会員登録</a>
-        </li>
-      </ul>
-    </nav>
-  </header> <!-- end mobile sidenav -->
-
-
-  <main class="main oh" id="main">
-
-  {% block header %}
-    <!-- Navigation -->
-    <header class="nav">
-
-      <div class="nav__holder nav--sticky">
-        <div class="container relative">
-          <div class="flex-parent">
-
-            <!-- Mobile Menu Button -->
-            <button class="nav-icon-toggle" id="nav-icon-toggle" aria-label="Open mobile menu">
-              <span class="nav-icon-toggle__box">
-                <span class="nav-icon-toggle__inner"></span>
-              </span>
-            </button> <!-- end mobile menu button -->
-
-            <!-- Logo -->
-            {% if not user.is_authenticated %}
-            <a href="{% url 'my_apps:index'%}" class="logo">
+                    <div class="col-xs-3 visible-xs">
+                        <a href="#" class="btn-menu-toggle"><i class="cv cvicon-cv-menu"></i></a>
+                    </div>
+                    <div class="col-sm-2 col-xs-6">
+                        {% if not user.is_authenticated %}
+            <a href="{% url 'my_apps:index'%}">
             {% else %}
-            <a href="{% url 'my_apps:mypage'%}" class="logo">
+            <a href="{% url 'my_apps:index'%}">
             {% endif %}
-              <img class="logo__img" src="{% static 'images/notech.png' %}" alt="農家プラットフォームNotech(ノーテック)">
-            </a>
+              <img class="logo" src="{% static 'images/notech.png' %}" alt="農家プラットフォームNotech(ノーテック)">
+                        </a>
+                    </div>
 
-            <!-- Nav-wrap -->
-            <nav class="flex-child nav__wrap d-none d-lg-block">
-              <ul class="nav__menu">
-                <li class="nav__dropdown">
-                  <a href="catalog.html">カテゴリーから探す</a>
-                  <ul class="nav__dropdown-menu nav__megamenu">
-                    <li>
-                      <div class="nav__megamenu-wrap">
-                        <div class="row">
 
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">All accessories</a>
-                            <ul class="nav__megamenu-list">
-                            {% for category in category_list %}
-                              <li><a href="#">{{category}}</a></li>
-                            {% endfor %}
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">for her</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">Underwear</a></li>
-                              <li><a href="#">Hipster</a></li>
-                              <li><a href="#">Dress</a></li>
-                              <li><a href="#">Hoodie &amp; Jackets</a></li>
-                              <li><a href="#">Tees</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">for him</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">T-shirt</a></li>
-                              <li><a href="#">Hoodie &amp; Jackets</a></li>
-                              <li><a href="#">Suits</a></li>
-                              <li><a href="#">Shorts</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#" class="nav__megamenu-title">watches</a>
-                            <ul class="nav__megamenu-list">
-                              <li><a href="#">Smart Watches</a></li>
-                              <li><a href="#">Diving Watches</a></li>
-                              <li><a href="#">Sport Watches</a></li>
-                              <li><a href="#">Classic Watches</a></li>
-                            </ul>
-                          </div>
-
-                          <div class="col nav__megamenu-item">
-                            <a href="#"><img src="{% static 'images/shop/megamenu_banner.png' %}" alt=""></a>
-                          </div>
-
+                    <div class="col-lg-8 col-sm-8 col-xs-3">
+                        <form action="{% url 'my_apps:service_search_list' %}" method="GET">
+                            <div class="topsearch">
+                                <i class="cv cvicon-cv-cancel topsearch-close"></i>
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-search"></i></span>
+                                    <input type="text" class="form-control" placeholder="何かお探しですか？" name="keyword" aria-describedby="sizing-addon2">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>/
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#"><i class="cv cvicon-cv-relevant"></i>野菜名</a></li>
+                                            <li><a href="#"><i class="cv cvicon-cv-calender"></i>品種</a></li>
+                                            <li><a href="#"><i class="cv cvicon-cv-view-stats"></i>生産地</a></li>
+                                        </ul>
+                                    </div><!-- /btn-group -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 hidden-xs dropdown">
+                        <div class="avatar pull-left dropdown-toggle"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <div class="user-profile">
+                            {% if user.profile.image_profile %}
+                                <img src="{{ user.profile.image_profile.medium.url }}">
+                            {% else %}
+                                <i class="material-icons d4-color">account_circle</i>
+                            {% endif %}
+                                <span class="caret"></span>
+                                <span class="status"></span>
+                            </div>
                         </div>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-
-
-
-              </ul> <!-- end menu -->
-
-            </nav> <!-- end nav-wrap -->
-
-
-
-             <!-- Sign in / Wishlist / Cart -->
-            <div class="top-bar__right flex-child">
-
-              <!-- Sign In -->
-
-              {% if user.is_authenticated %}
-
-              <ul class="nav__menu">
-                <li><a href="{% url 'my_apps:dm_list' %}"><i class="material-icons d3-color">mail_outline</i></a></li>
-                  <div class="dropdown dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   <div class="user-profile"  data-toggle="tooltip" data-placement="bottom" title="マイページ">
-                      {% if user.profile.image_profile %}
-                        <img src="{{ user.profile.image_profile.medium.url }}">
-                      {% else %}
-                        <i class="material-icons">account_circle</i>
-                      {% endif %}
-                       {% if user.profile.image_profile %}
-                         <span>{{ user.profile.user_nickname }}</span>
-                      {% else %}
-                         <span>{{ user.email }}</span>
-                      {% endif %}
+                         <ul class="dropdown-menu">
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'accounts:login' %}">ログイン</a></li>
+                                    <li><a href="{% url 'accounts:profile_create' %}">プロフィール</a></li>
+                                    <li><a href="{% url 'accounts:signup' %}">会員登録</a></li>
+                                    <li><a href="{% url 'accounts:user_system' %}">設定</a></li>
+                                    {% endif %}
+                         </ul>
+                        <div class="clearfix"></div>
                     </div>
-                  </div>
-                  <div class="dropdown-menu header-menu" aria-labelledby="dropdownMenu1">
-                     <div class="user-profile"  data-toggle="tooltip" data-placement="bottom" title="マイページ">
-                      {% if user.profile.image_profile %}
-                        <a href="{% url 'accounts:profile_detail' user.pk %}">
-                         <img src="{{ user.profile.image_profile.medium.url }}">
-                        </a>
-                     </div>
-                      {% else %}
-                        <a href="{% url 'accounts:profile_detail' user.pk %}">
-                          <i class="material-icons d4-color">account_circle</i>
-                        </a>
-                      {% endif %}
+                </div>
+                {% if user.is_authenticated %}
+                <div class="hidden-xs">
+                    <a href="{% url 'my_apps:service' %}">
+                        <div class="upload-button">
+                            <i class="material-icons">gavel</i><br>
+                            出品
+                        </div>
+                    </a>
+                </div>
+                {% else %}
+                <div class="hidden-xs">
+                    <a href="{% url 'accounts:signup' %}">
+                        <div class="upload-button">
+                            <i class="material-icons">person_pin</i><br>
+                            無料登録
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
 
-                      {% if not profile %}
-
-                      <a href="{% url 'accounts:profile_create' %}" >プロフィール作成</a>
-                      {% else %}
-                      <a href="{% url 'accounts:profile_update' user.pk %}">プロフィール修正</a>
-                      {% endif%}
-
-                    </div>
-                    <p class="widget-title">出品者メニュー</p>
-                    <ul>
-                      <li>
-                        <a href="{% url 'my_apps:service_list' %}">出品したサービス</span></a>
-                      </li>
-                      <li>
-                        <a href="{% url 'my_apps:service_list' %}">売上管理</a>
-                      </li>
-                      <li>
-                        <a href="{% url 'my_apps:service_list' %}">フォロワー</a>
-                      </li>
-                    </ul>
-                 <p class="widget-title mt-15">購入者メニュー</p>
-                    <ul>
-                      <li>
-                        <a href="{% url 'my_apps:service_list' %}">購入したサービス</a>
-                      </li>
-                      <li>
-                        <a href="{% url 'my_apps:service_list' %}">フォロー</a>
-                      </li>
-                      <li>
-                       <a href="{% url 'accounts:logout' %}" class="top-bar__item top-bar__sign-in">ログアウト</a>
-                      </li>
-
-                    </ul>
-                  </div>
-              </ul>
-
-
-
-
-
-
-              {% else %}
-
-              <a href="{% url 'accounts:login'%}" class="top-bar__item top-bar__sign-in" ><i class="ui-user"></i>ログイン</a>
-              <a href="{% url 'accounts:signup'%}" class="top-bar__item top-bar__sign-in" ><i class="ui-user"></i>会員登録</a>
-
-
-              {% endif %}
             </div>
+        </div>
+    </div>
+</div>
+<!-- /logo -->
 
-            <!-- Mobile Wishlist -->
-            <a href="#" class="nav__mobile-wishlist d-lg-none" aria-label="Mobile wishlist">
-              <i class="ui-heart"></i>
-            </a>
+<div class="mobile-menu">
+    <div class="mobile-menu-head">
+        <a href="#" class="mobile-menu-close"></a>
+        <a class="navbar-brand" href="index.html">
+            <img src="{% static '/images/logo.svg' %}" alt="Project name" class="logo" />
+            <span>Circle</span>
+        </a>
+        <div class="mobile-menu-btn-color">
+            <img src="{% static '/images/icon_bulb_light.png' %}" alt="">
+        </div>
+    </div>
+    <div class="mobile-menu-content">
+        <div class="mobile-menu-user">
+            <div class="mobile-menu-user-img">
+                <img src="{% static '/images/ava11.png' %}" alt="">
+            </div>
+            <p>Bailey Fry </p>
+            <span class="caret"></span>
+        </div>
+        <a href="#" class="btn mobile-menu-upload">
+            <i class="cv cvicon-cv-upload-video"></i>
+            <span>Upload Video</span>
+        </a>
+        <div class="mobile-menu-list">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="cv cvicon-cv-play-circle"></i>
+                        <p>Popular Videos</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="cv cvicon-cv-playlist"></i>
+                        <p>Browse Categories</p>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="mobile-menu-categories">
+                        <li class="color-active">
+                            <a href="#">Pages <span class="caret"></span></a>
+                            <ul>
+                                <li><a href="index.html">Home Page</a></li>
+                                <li><a href="single-video.html">Single Video Page</a></li>
+                                <li><a href="single-video-youtube.html">Single Video Youtube Embedded Page</a></li>
+                                <li><a href="single-video-vimeo.html">Single Video Vimeo Embedded Page</a></li>
+                                <li><a href="upload.html">Upload Video Page</a></li>
+                                <li><a href="upload-edit.html">Upload Video Edit Page</a></li>
+                                <li><a href="search.html">Searched Videos Page</a></li>
+                                <li><a href="channel.html">Single Channel Page</a></li>
+                                <li><a href="channels.html">Channels Page</a></li>
+                                <li><a href="single-video-tabs.html">Single Videos Page With Tabs</a></li>
+                                <li><a href="single-video-playlist.html">Single Videos Page With Playlist</a></li>
+                                <li><a href="history.html">History Page</a></li>
+                                <li><a href="categories.html">Browse Categories Page</a></li>
+                                <li><a href="categories_side_menu.html">Browse Categories Side Menu Page</a></li>
+                                <li><a href="subscription.html">Subscription Page</a></li>
+                                <li><a href="login.html">Login Page</a></li>
+                                <li><a href="signup.html">Signup Page</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="channel.html">Channels</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="cv cvicon-cv-liked"></i>
+                        <p>Liked Videos</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="cv cvicon-cv-history"></i>
+                        <p>History</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="cv cvicon-cv-purchased"></i>
+                        <p>Purchased Videos</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <a href="#" class="btn mobile-menu-logout">Log out</a>
+    </div>
+</div>
 
-            <!-- Mobile Cart -->
-            <a href="cart.html" class="nav__mobile-cart d-lg-none">
-              <i class="ui-bag"></i>
-              <span class="nav__mobile-cart-amount">(2)</span>
-            </a>
+<!-- goto -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="navbar-container2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-sm-9 hidden-xs">
+                        <ul class="list-inline menu">
+                            <li>
+                                取扱野菜
+                                <ul>
+                                    {% for category in category_list %}
+                                    <li><a href="{% url 'my_apps:service_search_list' %}?keyword={{category}}">{{ category }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
 
+                        </ul>
+                    </div>
+                    <div class="col-lg-3  col-sm-3 col-xs-12">
+                        <div class="h-icons">
+                            <a href="{% url 'accounts:follow' %}"><i class="cv material-icons" data-toggle="tooltip" data-placement="top" title="お気に入り">favorite_border</i></a>
+                            <a href="{% url 'cart:cart_detail'%}"><i class="cv material-icons" data-toggle="tooltip" data-placement="top" title="カート">shopping_cart</i></a>
+                            <a href="#"><i class="cv material-icons" data-toggle="tooltip" data-placement="top" title="ダイレクトメール">mail_outline</i></a>
+                        </div>
+                    </div>
 
-
-
-          </div> <!-- end flex-parent -->
-        </div> <!-- end container -->
-
-      </div>
-    </header> <!-- end navigation -->
-
-
-    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /goto -->
 {% if messages %}
-  <div class="alert alert-success" id="alerttimeout" role="alert">
-    <strong>Well done!</strong>
-    {% for message in messages %}
-    {{ message }}
-    {% endfor %}
-  </div>
-{% endif %}
-    {% block content %}
-    {% endblock %}
+    <div class="is-info">
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %} role="alert">
+            <div class="container">
+                <div class="row">
+                    <p class="font-weight"> {{ message }}</p>
 
-    {% block footer %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}
+{% block content %}
+{% endblock %}
+ {% block footer %}
      <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer__widgets">
           <div class="row">
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-3">
               <div class="widget widget__about">
-                <h4 class="widget-title white">about us</h4>
-                <p class="widget__about-text">Namira is a very slick and clean e-commerce template with endless possibilities.</p>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-              <div class="widget widget__newsletter">
-                <h4 class="widget-title white">get exclusive offers &amp; updates</h4>
-
-                <form class="mc4wp-form">
-                  <div class="mc4wp-form-fields">
-                    <p><input type="email" placeholder="Please enter your email address" aria-label="Newsletter input"></p>
-                    <p><input type="submit" value="Subscribe"></p>
-                  </div>
-                </form>
-
-                <div class="socials socials--white mt-20">
-                  <a href="#" class="facebook" aria-label="facebook"><i class="ui-facebook"></i></a>
-                  <a href="#" class="twitter" aria-label="twitter"><i class="ui-twitter"></i></a>
-                  <a href="#" class="snapchat" aria-label="snapchat"><i class="ui-snapchat"></i></a>
-                  <a href="#" class="instagram" aria-label="instagram"><i class="ui-instagram"></i></a>
-                  <a href="#" class="pinterest" aria-label="pinterest"><i class="ui-pinterest"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-2 col-md-6">
-              <div class="widget widget_nav_menu">
-                <h4 class="widget-title white">help</h4>
+                <h3 class="widget-title white">サービスを見つける</h3>
                 <ul>
-                  <li><a href="#">Contact Us</a></li>
-                  <li><a href="#">Tract Order</a></li>
-                  <li><a href="#">Returns &amp; Refunds</a></li>
-                  <li><a href="#">Private Policy</a></li>
-                  <li><a href="#">Shipping Info</a></li>
-                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>カテゴリーから探す</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>出品者から探す</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>出身地から探す</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>キーワード検索</a></li>
                 </ul>
               </div>
             </div>
 
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-4 col-md-3">
+              <div class="widget widget__newsletter">
+                <h3 class="widget-title white">ご利用ガイド</h3>
+
+                 <ul>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>ご利用ガイド</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>出品したい</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>購入したい</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>送料について</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>お支払い方法・手数料</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>取引の流れ</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>ルールと注意事項</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-3">
               <div class="widget widget_nav_menu">
-                <h4 class="widget-title white">information</h4>
+                <h3 class="widget-title white">出品する</h3>
                 <ul>
-                  <li><a href="#">Our Stores</a></li>
-                  <li><a href="#">Careers</a></li>
-                  <li><a href="#">Delivery Info</a></li>
-                  <li><a href="#">Terms &amp; Conditions</a></li>
-                  <li><a href="#">Site Map</a></li>
-                  <li><a href="#">Namira Reviews</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>出品する</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>出品のコツ</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>認定制度について</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>出品者インタビュー</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>販売促進プログラム</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-3">
+              <div class="widget widget_nav_menu">
+                <h3 class="widget-title white">サイト情報</h3>
+                <ul>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>ノーテックについて</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>利用規約</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>プライバシーポリシー</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>特定商取引法に基づく表記</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>よくある質問</a></li>
+                  <li><a href="#"><i class="material-icons">arrow_forward_ios</i>お問い合わせ</a></li>
                 </ul>
               </div>
             </div>
@@ -447,9 +332,9 @@
       <div class="footer__bottom">
         <div class="container">
           <div class="row">
-            <div class="col-md-6 text-sm-center">
+            <div class="text-center">
               <span class="copyright">
-                &copy; 2017 Namira Theme. Made by <a href="http://deothemes.com">DeoThemes</a>
+                &copy; 2019 Copyright Notech
               </span>
             </div>
 
@@ -469,21 +354,21 @@
       <a href="#top" aria-label="Go to top"><i class="ui-arrow-up"></i></a>
     </div>
 {% endblock %}
-  </main> <!-- end main-wrapper -->
+<script src="{% static '/js/vendor/clipboard/dist/clipboard.min.js' %}"></script>
+    <script src="{% static '/js/vendor/player/johndyer-mediaelement-89793bc/build/mediaelement-and-player.min.js' %}"></script>
+    <script src="{% static '/js/vendor/magnificPopup/dist/jquery.magnific-popup.min.js' %}"></script>
 
-
-
-  <!-- jQuery Scripts -->
-  <script type="text/javascript" src="{% static '/js/jquery.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/bootstrap.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/easing.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/jquery.magnific-popup.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/owl-carousel.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/flickity.pkgd.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/modernizr.min.js' %}"></script>
-  <script type="text/javascript" src="{% static '/js/scripts.js' %}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/js/swiper.min.js"></script>
+    <script src="{% static '/js/rater.js' %}" type="text/javascript"></script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="{% static '/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static '/js/custom.js' %}" type="text/javascript"></script>
+  　<script src="{% static '/js/easing.min.js' %}" type="text/javascript"></script>
+  　<script src="{% static '/js/owl-carousel.min.js' %}" type="text/javascript"></script>
+  　<script src="{% static '/js/flickity.pkgd.min.js' %}" type="text/javascript"></script>
+  　<script src="{% static '/js/modernizr.min.js' %}" type="text/javascript"></script>
+  　<script src="{% static '/js/scripts.js' %}" type="text/javascript"></script>
 
 </body>
 </html>

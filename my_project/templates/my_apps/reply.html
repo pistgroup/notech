@@ -1,0 +1,26 @@
+{% for reply in reply_list %}
+<div class="cl-comment reply">
+    <div class="cl-avatar user-profile">
+        <a href="{% url 'my_apps:comments' service.pk %}">
+            <img src="{{ reply.user.profile.image_profile.thumbnail.url }}" alt="">
+        </a>
+    </div>
+    <div class="cl-comment-text">
+        <div class="cl-name-date">
+            <a href="{% url 'my_apps:index' %}">
+                {% if reply.user.profile.user_name %}
+                {{ reply.user.profile.user_name }}
+                {% else %}
+                匿名
+                {% endif %}
+            </a>
+            {{ reply.date }}
+        </div>
+        <div class="cl-text">{{ reply.text | linebreaksbr }}</div>
+        {% with reply_list=reply.comment_set.all %}
+            {% include 'my_apps/reply.html' %}
+        {% endwith %}
+    </div>
+    <div class="clearfix"></div>
+</div>
+{% endfor %}

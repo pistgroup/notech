@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('my_apps.urls')),
     path('', include('accounts.urls')), # サインアップ機能追加
+    path('cart/', include('cart.urls')),
 
 
 ]

@@ -1,47 +1,28 @@
 
-a,
-.loader,
-.socials a:hover,
-.hero__link:hover,
-.feature__promo,
-.entry__title:hover a,
-.entry__meta a:hover,
-.entry__read-more-link:hover,
-.entry__tags a:hover,
-.comment-edit-link,
-.comment-reply:hover,
-.widget li a:hover,
-.widget_recent_entries li a:hover,
-.contact-info a:hover,
-.product__actions a:hover,
-.sign-in-popup__forgot-password:hover,
-.shop_table .product-name a:hover {
-	color: #bbbbbb;
-}
-
-.btn:hover,
-.btn-color,
-.btn-button:hover,
-.btn-button:focus,
-.ui-slider .ui-slider-range,
-.widget_tags a:hover,
-.pagination__page:not(span):hover,
-.remove:hover,
-#back-to-top:hover,
-.nav-cart__remove:hover {
-	background-color: #ec2424;
-}
-
 
 input:focus,
 textarea:focus,
 .hero__link:hover {
-	border-color: #ec2424;
+	border-color: #f9f9f9;
 }
 main#main {
     background: #f9f9f9;
 }
-
+.alert-success {
+    background-color: #30dab8;
+    border-color: #30dab8;
+    color: #ffffff;
+}
+.alert-info {
+    background-color:#ffc43d;
+    border-color:#ffc43d;
+    color: #fff;
+}
+.alert-danger,.alert-error {
+    background-color: #ef476f;
+    border-color: #ef476f;
+    color: #ffffff;
+}
 .d1-color{
 color:rgba(0,0,0,0.87);
 }
@@ -98,6 +79,9 @@ background-color: rgba(255,255,255,0.12);
 }
 .main-bgcolor{
 background:#30DAB8;
+}
+.main-color{
+color:#30DAB8;
 }
 .sub-bgcolor{
 background:#FFCF56;

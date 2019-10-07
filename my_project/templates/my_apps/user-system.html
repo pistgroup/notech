@@ -1,0 +1,30 @@
+{% extends 'my_apps/base.html' %}
+{% load static %}
+{% block meta %}
+<meta name="description" content="">
+<meta name="author" content="">
+<title>アカウント設定|{{ site_title }}</title>
+{% endblock %}
+{% block bodyclass %}
+channel user-system
+{% endblock %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row user-system-box font-weight">
+
+            <a href="#">
+                <div class="col-sm-6">
+                    出品者
+                </div>
+            </a>
+
+            <a href="{% url 'accounts:user_system_buy' %}">
+                <div class="col-sm-6">
+                    購入者
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

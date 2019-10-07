@@ -1,5 +1,5 @@
 from django import forms
-from .models import Service, Order, ServiceComments, DM
+from .models import *
 
 class ServiceCreateForm(forms.ModelForm):
     class Meta:
@@ -12,22 +12,31 @@ class ServiceCreateForm(forms.ModelForm):
         })
         }
 
-class OrderCreate(forms.ModelForm):
-    class Meta:
-        model = Order
-        fields = '__all__'
 
 class ServiceUpdateForm(forms.ModelForm):
-
     class Meta:
         model = Service
         fields = '__all__'
 
+class ServiceFavoriteCreate(forms.ModelForm):
+    class Meta:
+        model = ServiceFavorite
+        fields = ('post',)
 
 class ServiceCommentsCreate(forms.ModelForm):
     class Meta:
         model = ServiceComments
-        fields = ('text', 'date')
+        fields = ('rating', 'text',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['rating'].widget.attrs['style'] = 'display:none'
+
+class ServiceCommentsReply(forms.ModelForm):
+    class Meta:
+        model = ServiceComments
+        fields = ('text',)
+
 
 class DMCreate(forms.ModelForm):
     class Meta:

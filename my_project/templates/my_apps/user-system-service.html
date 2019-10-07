@@ -1,0 +1,257 @@
+{% extends 'my_apps/base.html' %}
+{% load static %}
+{% block meta %}
+<meta name="description" content="">
+<meta name="author" content="">
+<title>出品者管理|{{ site_title }}</title>
+{% endblock %}
+{% block bodyclass %}
+channel user-system-service
+{% endblock %}
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 u-system-content-left">
+                <div class="channel-details">
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-2 col-xs-12">
+                            <div class="c-details no-padding">
+                                <div class="c-name d1-color font-weight">
+                                    <h1 class="page-title pb-20">出品者管理</h1>
+                                    {% if not profile %}
+                                     <a href="{% url 'accounts:profile_create' %}">
+                                        <div class="alert alert-danger" role="alert">
+                                          <i class="material-icons">report</i>
+                                            <span class="font-mini">アカウント設定を完了してください</span>
+                                        </div>
+
+                                     </a>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="c-nav">
+                                    <ul class="list-inline hidden-xs d2-color">
+                                        <li class="active"><a href="#channel-tabsA" data-toggle="tab">売上管理</a></li>
+                                        <li><a href="#channel-tabsB" data-toggle="tab">購入者管理</a></li>
+                                        <li><a href="#channel-tabsC" data-toggle="tab">設定</a></li>
+                                    </ul>
+
+                                    <div class="btn-group dropdown pull-right">
+                                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                             <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li class="active"><a href="#channel-tabsA" data-toggle="tab">お知らせ</a></li>
+                                            <li><a href="#channel-tabsB" data-toggle="tab">売上管理</a></li>
+                                            <li><a href="#channel-tabsC" data-toggle="tab">設定</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="c-sub pull-right">
+                                    <div class="c-sub-wrap">
+                                        <div class="c-f">
+                                            フォロー
+                                        </div>
+                                        <div class="c-s">
+                                            145
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Featured Videos -->
+                <div class="content-block">
+                    <!-- タブ内容 -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="channel-tabsA">
+                            <div class="cb-content newslist">
+                                <div class="row">
+                                    <div class="text-center">
+                                        <p>売上金残高</p>
+                                        <p class="totalpay">¥0</p>
+                                        <a href="#"><button class="btn btn-primary">振込申請</button></a>
+                                        <div class="pay-totals">
+                                            <div class="col-sm-6 col-md-offset-3">
+                                                <div class="col-sm-6">
+                                                    <p>今月の売上</p>
+                                                    <p class="totalpay">¥0</p>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <p>累計の売上
+                                                    <i class="material-icons" data-toggle="tooltip" data-placement="top" title="<h1></h1>&#x0A;Tooltipontop">
+                                                        help_outline
+                                                    </i>
+                                                    </p>
+                                                    <p class="totalpay">¥0</p>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                             <p class="mt-20 mb-40">発送が完了されると売上に計上されます</p>
+                                            <div class="service-desc">
+                                                <p class="page-subtitle">売上金について</p>
+                                                <ul>
+                                                    <li>
+                                                        ・貯まっている売上が161円以上から振込申請ができます。別途、振込手数料として160円かかります。
+                                                        ※ 3,000円以上の振込申請は、手数料が無料になります。
+                                                    </li>
+                                                    <li>
+                                                        ・振込申請を1〜15日に行った場合は同月の20日、16〜月末の場合は翌月の5日（休日の場合は翌営業日）に振り込まれます。
+                                                    </li>
+                                                    <li>
+                                                        ・登録いただいた銀行口座に自動的に振込申請をされたい場合は<a class="blue" href="#">ゴールド会員</a>の資格が必要です。
+                                                    </li>
+                                                </ul>
+                                                <p class="mt-40 pb-10">売上金の振込申請をするには、アカウント設定と振込口座の登録が必須です。</p>
+                                                <table class="table table-reflow">
+                                                  <tbody>
+
+                                                   {% for set in profile_l %}
+
+                                                        <tr>
+                                                          <td>アカウント設定</td>
+                                                          <td>{{ set.user }}</td>
+                                                          <td></td>
+                                                          <td>
+                                                              {% if set %}
+
+                                                              <a class="blue" href="{% url 'accounts:profile_update' set.pk %}">編集する</a>
+
+                                                              {% else %}
+                                                               <a class="blue" href="{% url 'accounts:profile_create' %}">作成する</a>
+                                                              {% endif %}
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>振込口座</td>
+                                                          <td>{{ set.user }}</td>
+                                                          <td></td>
+                                                          <td><a class="bluse" href="#">編集する</a></td>
+                                                        </tr>
+                                                  {% endfor %}
+
+
+
+
+                                                  </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                       <table class="table table-striped">
+                                          <tbody>
+
+                                          {% for buy in buyinghistory_list %}
+                                          {% if buy.user == request.user %}
+                                            <tr>
+                                              <td>{{ buy.date }}</td>
+                                              <td>{{ buy.user }}</td>
+                                              <td>{{ buy.is_send }}</td>
+                                              <td><a href="#">{{ buy.is_send }}</a></td>
+                                            </tr>
+                                          {% endif %}
+                                          {% endfor %}
+
+                                          </tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="channel-tabsB">
+                            <div class="cb-content videolist">
+                                <div class="row">
+                                    {% for service in service_list|slice:"1:3" %}
+                                    <div class="col-lg-3 col-sm-6 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                                ¥{{ service.amount }}/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    {% for service in service_list|slice:":3" %}
+                                    <div class="col-lg-3 col-sm-3 videoitem">
+                                        <div class="b-video">
+                                            <div class="v-img">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                                    {% if service.image01.medium.url %}
+                                                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                                    {% else %}
+                                                      <img src="/media/service/no-image.medium.png">
+                                                    {% endif %}
+                                                </a>
+                                                <div class="time">
+                                                    <a href="{% url 'my_apps:index' %}">
+                                                         <i class="material-icons">bookmark_border</i>{{ service.category }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="v-desc">
+                                                <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                            </div>
+                                            <div class="v-views">
+                                               ¥ {{ service.amount }}/{{ service.unit }} <span class="v-percent"><span class="v-circle"></span> 78%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="channel-tabsC">
+                           <table class="channel-table">
+                              <tr>
+                                <th>販売者名</th>
+                                <td>{{ service.user.profile.user_name }}</td>
+                              </tr>
+                              <tr>
+                                <th>生産地</th>
+                                <td>{{ service.user.profile.derivary_date }}</td>
+                              </tr>
+                              <tr>
+                                <th>取扱品種</th>
+                                <td>トマト</td>
+                              </tr>
+                            </table>
+                                <a href="#" class="btn btn-def">
+                                    <div>
+                                    生産者に問い合わせる
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                    <!-- Featured Videos -->
+                </div>
+            </div>
+            {% include 'my_apps/side.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

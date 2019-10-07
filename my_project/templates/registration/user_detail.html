@@ -14,9 +14,9 @@
     <div class="row">
         <div class="col-sm-3 text-center">
 
-            {% for profile in profile_list %}
-                 <a href="{% url 'accounts:profile_detail' user.pk %}">
-         {% endfor %}
+            {% if user.is_authenticated %}
+                 <a href="{% url 'accounts:profile_update' user.pk %}">
+
                      <div class="user-profile">
                           {% if profile.image_profile %}
                       <img src="{{ profile.image_profile.medium.url }}">
@@ -25,12 +25,20 @@
                     {% endif %}
                       </div>
                 </a>
-
+            {% else %}
+             <div class="user-profile">
+                          {% if profile.image_profile %}
+                      <img src="{{ profile.image_profile.medium.url }}">
+                    {% else %}
+                      <i class="material-icons" style="font-size:10rem;">account_circle</i>
+                    {% endif %}
+                      </div>
+            {% endif %}
         </div>
         <div class="col-sm-9">
             <h1>{{ profile.user_name }}</h1>
 
-            <form action="{% url 'accounts:follow' user.pk %}" method="get">
+            <form action="{% url 'accounts:follow' profile.pk %}" method="get">
                 <button type="submit" name="button">お気に入り追加</button>
                 {% csrf_token %}
             </form>

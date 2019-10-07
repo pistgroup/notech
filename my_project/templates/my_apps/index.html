@@ -1,125 +1,370 @@
 {% extends 'my_apps/base.html' %}
 {% load static %}
+{% block meta %}
+<meta name="description" content="">
+<meta name="author" content="">
+<title>{{ site_title }}</title>
+{% endblock %}
 {% block content %}
-    <!-- Hero Slider -->
 
-    <section class="hero">
-      <div id="owl-hero" class="owl-carousel owl-theme owl-carousel--dots-inside">        
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 
-        <div class="hero__slide" style="background-image: url({% static 'images/hero/1.jpg' %})">
-          <!--
-          <div class="container text-center">
-            <h1 class="hero__title">Got the style? Show us</h1>
-            <a href="single-product.html" class="hero__link">Shop Now</a>
-          </div>
-          -->
-        </div>
+                <!-- Updates from Subscriptions -->
+                <div class="content-block">
+                    <div class="cb-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-sm-10 col-xs-10">
+                                <ul class="list-inline">
+                                    <li class="d1-color font-weight">カテゴリーから探す</li>
+                                </ul>
+                            </div>
 
-        <div class="hero__slide" style="background-image: url({% static 'images/hero/2.jpg' %})">
-          <!--
-          <div class="container relative">
-            <div class="hero__holder">
-              <h1 class="hero__title-1">dope<br>street<br>wear</h1>
-              <a href="single-product.html" class="hero__link-1 btn btn-lg btn-dark"><span>New Arrivals</span></a>
-            </div>
-          </div>
-          -->
-        </div>
-
-        <div class="hero__slide" style="background-image: url({% static 'images/hero/3.jpg' %})">
-          <!--
-          <div class="container text-center">
-            <div class="hero__holder-1">
-              <h1 class="hero__title-2">new lookbook</h1>
-              <h3 class="hero__subtitle">Sale 50% off. Get only trendy items</h3>
-              <a href="single-product.html" class="hero__link-1 btn btn-lg btn-color"><span>Shop the trend</span></a>
-            </div>
-          </div>
-          -->
-        </div>
-
-      </div> <!-- end owl -->
-    </section> <!-- end hero slider -->
-
-    <!-- Search -->
-            <div class="container mt-30">
-              <form method="get" class="nav__search-form" method="GET" action="{% url 'my_apps:service_search_list' %}">
-                <input type="search" class="nav__search-input" placeholder="何かお探しですか？" name="keyword">
-                <button type="submit" class="nav__search-submit">
-                  <i class="ui-search"></i>
-                </button>
-              </form>
-            </div>
-    <!-- Best Seller -->
-    <section class="section-wrap pb-30">
-      <div class="container">
-
-        <div class="heading-row">
-          <div class="text-center">
-            <h2 class="heading bottom-line">
-              最新の
-
-            </h2>
-          </div>
-        </div>
- <div class="row">
-
-          {% for service in service_list %}
-
-    <div class="col-sm-3">
-       <div class="card contents-card">
-           <div class="img-box">
-              <a href="{% url 'my_apps:service_detail' service.pk %}">
-                  {% if service.image01.medium.url %}
-                      <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
-                  {% else %}
-                      <img src="/media/service/no-image.medium.png">
-                  {% endif %}
-              </a>
-
-                <a href="{% url 'accounts:profile_detail' user.pk %}">
-                    <div class="user-profile">
-                        {% if profile.image_profile %}
-                        <img src="{{ profile.image_profile.medium.url }}">
-                        {% else %}
-                        <i class="material-icons">account_circle</i>
-                        {% endif %}
-                        {{ service.user.profile.user | truncatechars:7}}
+                        </div>
                     </div>
-                </a>
+                    <div class="cb-content avatars">
+                        <div class="row">
+                            {% for category in category_list %}
+                            <div class="col-lg-1 col-sm-2 col-xs-3 text-center">
+                                <a href="{% url 'my_apps:service_search_list' %}?keyword={{ category }}">
+                                    <img src="{{ category.image.medium.url }}" alt="{{ category }}">
+                                </a>
+                                 <div class="font-mini category-subtitle">{{ category }}</div>
+                            </div>
+                           {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- /Updates from Subscriptions -->
 
-           </div>
+                <!-- Featured Videos -->
+                <div class="content-block head-div">
+                    <div class="cb-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-sm-10 col-xs-8">
+                                <ul class="list-inline">
+                                    <li>
+                                        <a href="#" class="d1-color font-weight">
+                                            <span class="hidden-xs">おすすめ</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-4">
+                                <div class="btn-group pull-right bg-clean">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        並び替え <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Relevant</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-calender"></i> Recent</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-view-stats"></i> Viewed</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-star"></i> Top Rated</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-watch-later"></i> Longest</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cb-content videolist">
+                        <div class="row">
+                            {% for service in service_list|slice:"1:3" %}
+                            <div class="col-lg-3 col-sm-6 videoitem">
+                                <div class="b-video">
+                                    <div class="v-img">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                            {% if service.image01.medium.url %}
+                                              <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                            {% else %}
+                                              <img src="/media/service/no-image.medium.png">
+                                            {% endif %}
+                                        </a>
+                                        <div class="time"><span class="v-percent"><i class="material-icons">favorite_border</i> {{ service.favorite_count }}</span></div>
+                                    </div>
+                                    <div class="v-desc">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                    </div>
+                                    <div class="v-views">
+                                         <span class="font-weight">¥{{ service.amount }}</span><span class="font-mini d3-color">/{{service.unit}}</span>
+                                        {% for profile in profile_list %}
+                                        <a href="{% url 'accounts:profile_detail' service.pk %}" class="v-pers-right">
+                                            <div class="user-profile">
+                                                {% if service.user.profile.image_profile %}
+                                                <img src="{{ service.user.profile.image_profile.medium.url }}">
+                                                {% else %}
+                                                <i class="material-icons">account_circle</i>
+                                                {% endif %}
+                                                {{ service.user.profile.user | truncatechars:7}}
+                                            </div>
+                                        </a>
+                                       {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                            {% for service in service_list|slice:":3" %}
+                            <div class="col-lg-3 col-sm-3 videoitem">
+                                <div class="b-video">
+                                    <div class="v-img">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                            {% if service.image01.medium.url %}
+                                              <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                            {% else %}
+                                              <img src="/media/service/no-image.medium.png">
+                                            {% endif %}
+                                        </a>
+
+                                        <div class="time"><span class="v-percent"><i class="material-icons">favorite_border</i> {{ service.favorite_count }}</span></div>
+                                    </div>
+                                    <div class="v-desc">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.avg_rating }}{{ service.title }}</a>
+                                    </div>
+                                    <div class="v-views">
+                                        <span class="font-weight">¥{{ service.amount }}</span><span class="font-mini d3-color">/{{service.unit}}</span>
 
 
-              <div class="card-body">
+                                        <a href="{% url 'accounts:profile_detail' service.pk %}" class="v-pers-right">
+                                            <div class="user-profile">
+                                                {% if service.user.profile.image_profile %}
+                                                <img src="{{ service.user.profile.image_profile.medium.url }}">
+                                                {% else %}
+                                                <i class="material-icons">account_circle</i>
+                                                {% endif %}
+                                            </div>
+                                        </a>
 
-                  <h3 class="font-mini">
-                      <a href="{% url 'my_apps:service_detail' service.pk %}">
-                          {{ service.title | truncatechars:32 }}
-                      </a>
-                  </h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
 
-                  <ul class="card-bottom">
-                       <div class="progress">
-                         <div class="progress-bar" style="width: 20%;">在庫</div>
-                       </div>
-                      <li><span>評価</span>4.5</li>
-                      <li><span>単価/{{ service.unit }}</span>¥{{ service.amount }}</li>
-                      <li><span>出荷日</span>{{ service.delivery_date }}</li>
-                  </ul>
+                <!-- Popular Playlists -->
+                <div class="content-block head-div head-arrow">
+                    <div class="head-arrow-icon">
+                        <i class="cv cvicon-cv-next"></i>
+                    </div>
+                    <div class="cb-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-sm-10 col-xs-8">
+                                <ul class="list-inline">
+                                    <li><a href="#" class="d1-color font-weight">殿堂入り農家</a></li>
 
-              </div>
-           </div>
+                                </ul>
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-xs-4">
+                                <div class="btn-group pull-right bg-clean">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Sort by  <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#"><i class="cv cvicon-cv-relevant"></i> Relevant</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-calender"></i> Recent</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-view-stats"></i> Viewed</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-star"></i> Top Rated</a></li>
+                                        <li><a href="#"><i class="cv cvicon-cv-watch-later"></i> Longest</a></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cb-content">
+                        <div class="row">
+
+                            {% for service in service_list|slice:":3" %}
+                            <div class="col-lg-3 col-sm-3 videoitem">
+                                <div class="b-video">
+                                    <div class="v-img">
+                                        {% for profile in profile_list %}
+                                        <a href="{% url 'my_apps:service_detail' profile.pk %}">
+                                            {% if service.image01.medium.url %}
+                                              <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                            {% else %}
+                                              <img src="/media/service/no-image.medium.png">
+                                            {% endif %}
+                                        </a>
+                                        {% endfor %}
+                                        <div class="time"><span class="v-percent"><i class="material-icons">favorite_border</i> 78</span></div>
+                                    </div>
+                                    <div class="v-desc">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                    </div>
+                                    <div class="v-views">
+                                        <span class="font-weight">¥{{ service.amount }}</span><span class="font-mini d3-color">/{{service.unit}}</span>
+
+                                        {% for profile in profile_list %}
+                                        <a href="{% url 'accounts:profile_detail' profile.pk %}" class="v-pers-right">
+                                            <div class="user-profile">
+                                                {% if service.user.profile.image_profile %}
+                                                <img src="{{ service.user.profile.image_profile.medium.url }}">
+                                                {% else %}
+                                                <i class="material-icons">account_circle</i>
+                                                {% endif %}
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /Popular Playlists -->
+
+                <!-- Popular Channels -->
+                <div class="content-block head-div head-arrow">
+                    <div class="head-arrow-icon">
+                        <i class="cv cvicon-cv-next"></i>
+                    </div>
+                    <div class="cb-header">
+                        <div class="row">
+                            <div class="col-lg-10 col-sm-10 col-xs-8">
+                                <ul class="list-inline">
+                                    <li><a href="#" class="d1-color font-weight">旬な野菜</a></li>
+                                </ul>
+                            </div>
+                             {% for service in service_list|slice:":3" %}
+                            <div class="col-lg-3 col-sm-3 videoitem">
+                                <div class="b-video">
+                                    <div class="v-img">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %}">
+                                            {% if service.image01.medium.url %}
+                                              <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+                                            {% else %}
+                                              <img src="/media/service/no-image.medium.png">
+                                            {% endif %}
+                                        </a>
+                                        <div class="time"><span class="v-percent"><i class="material-icons">favorite_border</i> 78</span></div>
+                                    </div>
+                                    <div class="v-desc">
+                                        <a href="{% url 'my_apps:service_detail' service.pk %" class="d1-color font-weight">{{ service.title }}</a>
+                                    </div>
+                                    <div class="v-views">
+                                        <span class="font-weight">¥{{ service.amount }}</span><span class="font-mini d3-color">/{{service.unit}}</span>
+
+
+                                        <a href="{% url 'accounts:profile_detail' service.pk %}" class="v-pers-right">
+                                            <div class="user-profile">
+                                                {% if service.user.profile.image_profile %}
+                                                <img src="{{ service.user.profile.image_profile.medium.url }}">
+                                                {% else %}
+                                                <i class="material-icons">account_circle</i>
+                                                {% endif %}
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="cb-content chanels-row">
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-4 col-xs-4">
+                                <div class="b-chanel">
+                                    <a href="#">
+                                        <img src="images/chanel-1.png" alt="">
+                                        <div class="hover">
+                                            <span>Ray Simpson</span>
+                                            <span><i class="cv cvicon-cv-liked"></i> 5K</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-4 col-xs-4">
+                                <div class="b-chanel">
+                                    <a href="#">
+                                        <img src="images/chanel-2.png" alt="">
+                                        <div class="hover">
+                                            <span>Ray</span>
+                                            <span><i class="cv cvicon-cv-liked"></i> 215K</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-4 col-xs-4">
+                                <div class="b-chanel">
+                                    <a href="#">
+                                        <img src="images/chanel-3.png" alt="">
+                                        <div class="hover">
+                                            <span>Simpson</span>
+                                            <span><i class="cv cvicon-cv-liked"></i> 21</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-4 col-xs-4">
+                                <div class="b-chanel">
+                                    <a href="#">
+                                        <img src="images/chanel-4.png" alt="">
+                                        <div class="hover">
+                                            <span>Ray Simpson</span>
+                                            <span><i class="cv cvicon-cv-liked"></i> 134</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-4 col-xs-4">
+                                <div class="b-chanel">
+                                    <a href="#">
+                                        <img src="images/chanel-5.png" alt="">
+                                        <div class="hover">
+                                            <span>Simpson</span>
+                                            <span><i class="cv cvicon-cv-liked"></i> 1.6M</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-4 col-xs-4">
+                                <div class="b-chanel">
+                                    <a href="#">
+                                        <img src="images/chanel-6.png" alt="">
+                                        <div class="hover">
+                                            <apan>Ray</apan>
+                                            <span><i class="cv cvicon-cv-liked"></i> 265K</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Popular Channels -->
+
+                <!-- pagination -->
+                <div class="v-pagination">
+                    <ul class="list-inline">
+                        <li class="v-pagination-prev"><a href="#"><i class="cv cvicon-cv-previous"></i></a></li>
+                        <li class="v-pagination-first"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">...</a></li>
+                        <li><a href="#">10</a></li>
+                        <li class="v-pagination-skin visible-xs"><a href="#">Skip 5 Pages</a></li>
+                        <li class="v-pagination-next"><a href="#"><i class="cv cvicon-cv-next"></i></a></li>
+                    </ul>
+                </div>
+                <!-- /pagination -->
+
+            </div>
         </div>
-
-          {% endfor %}
-              </div>
-      </div> <!-- end container -->
-    </section> <!-- end best seller -->
-
-
-    
-
-
+    </div>
+</div>
 
 {% endblock %}

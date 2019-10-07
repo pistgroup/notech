@@ -32,7 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'reversion', #履歴管理
     'stdimage',
+    'cart.apps.CartConfig',
     'accounts.apps.AccountsConfig',
     'my_apps.apps.MyAppsConfig',
     'django.contrib.admin',
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'my_project.urls'
 
 TEMPLATES = [
@@ -68,10 +71,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'my_apps.context_parts.common',
-
-
-
+                'cart.context_data.counter',
             ],
+
         },
     },
 ]
@@ -145,3 +147,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # メールをコンソールに表示する
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Stripe API
+STRIPE_PUBLIC_KEY = 'pk_test_pukTGyXS6Uv4tpqjoRME5L5900keuWYsW7'
+STRIPE_SECRET_KEY = 'sk_test_J6A1KYV2dyogayCuOBJHFT5t00TCFVRj9L'

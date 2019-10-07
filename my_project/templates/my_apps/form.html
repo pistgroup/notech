@@ -1,7 +1,11 @@
 {% extends "my_apps/base.html" %}
 {% block content %}
 <div class="container">
-
+<div class="toggle-switch">
+  <input id="toggle" class="toggle-input" type='checkbox'>
+  <label for="toggle" class="toggle-label">
+  </label>
+</div>
         <form action="" method="POST" enctype="multipart/form-data">
             {{ form.non_field_errors }}
             <table class="table">

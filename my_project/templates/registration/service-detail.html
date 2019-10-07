@@ -1,0 +1,159 @@
+{% extends "my_apps/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-30 base-bg">
+    <h1 class="base-title">
+        {{ service.title }}
+    </h1>
+    <ul class="base-ul text-center ">
+        <li>
+        {% for profile in profile_list %}
+             <a href="{% url 'accounts:profile_detail' profile.pk %}">
+
+                  <div class="user-profile">
+                          {% if profile.image_profile %}
+                      <img src="{{ profile.image_profile.medium.url }}">
+                    {% else %}
+                      <i class="material-icons">account_circle</i>
+                    {% endif %}
+                      {{ service.user.profile.user | truncatechars:7}}
+                      </div>
+            </a>
+            {% endfor %}
+        </li>
+        <li>
+            <a href="{% url 'my_apps:service_list' %}">
+                <i class="material-icons">folder_open</i>{{ service.category }}
+            </a>
+        </li>
+
+    </ul>
+    <div class="row mt-15">
+        <div class="col-sm-6">
+          <div id="owl-single" class="owl-carousel owl-theme owl-carousel--dots-inside">
+              {% if service.image01.medium.url %}
+              <img class="card-img-top" src="{{ service.image01.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+              {% else %}
+              <img src="/media/service/no-image.medium.png">
+              {% endif %}
+              {% if service.image02.medium.url %}
+              <img class="card-img-top" src="{{ service.image02.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+              {% endif %}
+              {% if service.image03.medium.url %}
+              <img class="card-img-top" src="{{ service.image03.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+              {% endif %}
+              {% if service.image04.medium.url %}
+              <img class="card-img-top" src="{{ service.image04.medium.url }}" alt="{{ user.profile.user_name }}農家さんの{{ service.category }}｜農業マッチングNotech(ノーテック)">
+              {% endif %}
+
+          </div>
+            <div class="mt-10">
+               {{ service.text }}
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+
+            {% for product_tag in service.tags.all %}
+                <div class="single-tag-box mb-15">
+                     <a class="single-tag" href="{% url 'my_apps:service_list' %}">
+                        #{{ product_tag }}
+                     </a>
+                </div>
+            {% endfor %}
+            <h2 class="bese-subtitle"><i class="material-icons">¥</i>金額</h2>
+            <p class="base-titletext mb-15">{{ service.amount }}円/1{{ service.unit }}</p>
+             <h2 class="bese-subtitle"><i class="material-icons">local_shipping</i>出荷日</h2>
+            <p class="base-titletext mb-15">{{ service.delivery_date }}以内に出荷します。</p>
+             <h2 class="bese-subtitle"><i class="material-icons">stars</i>商品ランク</h2>
+            <p class="base-titletext mb-15">{{ service.rank }}</p>
+
+
+             {% for comment in service.servicecomments_set.all %}
+            <!--吹き出しはじまり-->
+<div class="balloon5">
+  <div class="faceicon">
+   <img src="{{ comment.user.profile.image.thumbnail.url }}">
+      {{ comment.user.profile.user_name }}
+  </div>
+  <div class="chatting">
+    <div class="says">
+      <p>{{ comment.text | linebreaksbr }}</p>
+    </div>
+  </div>
+</div>
+
+             <form action="{% url 'my_apps:comments' service.pk %}" method="POST">
+                    {{ form.as_p }}
+                    <button type="submit" class="d4-bgcolor">返信</button>
+
+                    {% csrf_token %}
+                </form>
+<!--吹き出し終わり-->
+            <style>.balloon5 {
+  width: 100%;
+  margin: 1.5em 0;
+  overflow: hidden;
+}
+
+.balloon5 .faceicon {
+  float: left;
+  margin-right: -90px;
+  width: 80px;
+}
+
+.balloon5 .faceicon img{
+  width: 100%;
+  height: auto;
+  border: solid 3px #d7ebfe;
+  border-radius: 50%;
+}
+
+.balloon5 .chatting {
+  width: 100%;
+}
+
+.says {
+  display: inline-block;
+  position: relative;
+  margin: 5px 0 0 105px;
+  padding: 17px 13px;
+  border-radius: 12px;
+  background: #d7ebfe;
+}
+
+.says:after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  left: -24px;
+  border: 12px solid transparent;
+  border-right: 12px solid #d7ebfe;
+}
+
+.says p {
+  margin: 0;
+  padding: 0;
+}</style>
+
+                    {% endfor %}
+
+               <a class="btn d4-bgcolor" href="{% url 'my_apps:comments' service.pk %}">レビュー</a>
+            <div>
+                 <!-- href を追加-->
+
+                <button type="submit" class="pay btn"><a href="{% url 'cart:add_cart' service.pk %}">購入する</a></button>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-30 base-bg">
+
+
+</div>
+
+{% endblock %}

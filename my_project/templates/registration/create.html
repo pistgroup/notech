@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="container">
+
         <div class="card card-container">
             <form class="form-signin" action="" method="POST">
                 {{ form.non_field_errors }}
@@ -15,7 +16,7 @@
                 </div>
                 {% endfor %}
                 {% csrf_token %}
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">無料登録する</button>
+                <button class="btn btn-def btn-signin" type="submit">無料登録する</button>
             </form>
         </div><!-- /card-container -->
     </div><!-- /container -->

@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from .models import User, Profile, UserInfomation, Follow
+from reversion.admin import VersionAdmin
 
 
 class MyUserChangeForm(UserChangeForm):
@@ -17,10 +18,10 @@ class MyUserCreationForm(UserCreationForm):
         fields = ('email',)
 
 
-class MyUserAdmin(UserAdmin):
+class MyUserAdmin(UserAdmin, VersionAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name','is_favorite')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
@@ -38,8 +39,11 @@ class MyUserAdmin(UserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
 
+class ReverseAdmin(VersionAdmin):    #変更
+    class Meta:
+        fields = '__all__'
 
 admin.site.register(User, MyUserAdmin)
-admin.site.register(Profile)
-admin.site.register(Follow)
-admin.site.register(UserInfomation)
+admin.site.register(Profile, ReverseAdmin)
+admin.site.register(Follow, ReverseAdmin)
+admin.site.register(UserInfomation, ReverseAdmin)
